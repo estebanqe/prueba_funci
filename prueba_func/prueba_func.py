@@ -5,6 +5,10 @@ from prueba_func.pages.index import index
 from prueba_func.pages.courses import courses
 #from prueba_func.api.api import repo, live, featured, schedule
 
+class State(rx.State):
+    """Define your app state here"""
+
+
 app = rx.App(
     stylesheets=styles.STYLESHEETS,
     style=styles.BASE_STYLES,
