@@ -10,7 +10,7 @@ def navbar() -> rx.Component:
     return rx.hstack(            #encabezado
             rx.link(     
                 rx.box(
-                    rx.text("Amorcito",as_="span",color=Color.PRIMARY.value),
+                    rx.text("Amor",as_="span",color=Color.PRIMARY.value),
                     rx.text(" ti amo",as_="span",color=Color.SECONDARY.value),
                     style=style.navbar_title_style
                 ),
