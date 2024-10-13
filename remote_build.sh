@@ -1,4 +1,4 @@
-cd /vscode/prueba_func
+cd //wsl.localhost/Ubuntu-22.04/home/esteban/vscode/prueba_func
 python -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
