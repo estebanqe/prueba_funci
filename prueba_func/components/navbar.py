@@ -11,7 +11,7 @@ def navbar() -> rx.Component:
             rx.link(     
                 rx.box(
                     rx.text("Amorcito",as_="span",color=Color.PRIMARY.value),
-                    rx.text(" te amo",as_="span",color=Color.SECONDARY.value),
+                    rx.text(" ti amo",as_="span",color=Color.SECONDARY.value),
                     style=style.navbar_title_style
                 ),
                 href=Route.INDEX.value,
