@@ -9,17 +9,18 @@ from prueba_func.components.link_button import link_button
 # from prueba_func.state.PageState import PageState
 
 
-def header(details=True) -> rx.Component:
+def header(details=True, live=False) -> rx.Component:
     return rx.vstack(
         rx.hstack(
             rx.box(
-                 #rx.cond(
+                  rx.cond(
+                    live,
                     # PageState.live_status.live,
                     rx.link(
                         rx.image(
-                            src="/AvatarC.png",
+                            src="/icons/book-solid.svg",
                             height=Size.DEFAULT.value,
-                            width=Size.DEFAULT.value
+                            width=Size.DEFAULT.value    
                         ),
                         href=const.CATALOGO,
                         is_external=True,
@@ -31,7 +32,7 @@ def header(details=True) -> rx.Component:
                         bottom="0",
                         right="0"
                     ),
-                #),
+                ),
                 rx.avatar(
                     name="Julio. César Quiña",
                     size=Spacing.MEDIUM_BIG.value,
@@ -42,7 +43,7 @@ def header(details=True) -> rx.Component:
                     padding="2px",
                     border=f"4px solid {Color.PRIMARY.value}"
                 ),
-                # position="relative"
+                position="relative"
             ),
                 
             rx.vstack(
