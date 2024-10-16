@@ -1,22 +1,22 @@
 import reflex as rx
 import prueba_func.constants as const
 #from prueba_func.components.newsletter 
-#from prueba_func.components.featured_link import featured_link
-#from prueba_func.routes import Route
+from prueba_func.components.featured_link import featured_link
+from prueba_func.model.Featured import Featured
+from prueba_func.routes import Route
 from prueba_func.components.link_button import link_button
 from prueba_func.components.title import title
-from prueba_func.estilo.estilo import Size, Spacing
-from prueba_func.estilo.estilo import Color
-#from prueba_func.state.PageState import PageState
+from prueba_func.estilo.estilo import Color, Spacing
+from prueba_func.state.PageState import PageState
 
-def index_links() -> rx.Component:
+def index_links(featured=list[Featured]) -> rx.Component:
     return rx.vstack(
         title("Nueva Pagina"),
         link_button(
             "pagina nueva",
             "Nueva descripcion de la pagina nueva ",
             "/icons/facebook.svg",
-            #Route.COURSES.value,
+            Route.COURSES.value,
             False
         ),
         
@@ -45,6 +45,34 @@ def index_links() -> rx.Component:
             "/icons/linkedin.svg",
             const.LINKEDLINK
             ),
+        
+#    rx.cond(
+#        featured,
+#        rx.vstack(
+#            title("Destacado"),
+#            rx.foreach(
+#                featured,
+#                featured_link
+#            )
+#        )
+#    ),
+        
+    rx.cond(
+            PageState.featured_info,
+            rx.vstack(
+                title("Destacado"),
+                rx.flex(
+                    rx.foreach(
+                        PageState.featured_info,
+                        featured_link
+                    ),
+                    flex_direction=["column", "row"],
+                    spacing=Spacing.DEFAULT.value
+                ),
+                spacing=Spacing.DEFAULT.value
+            )
+        ),
+        
         
         title("Cátalogo"),
         link_button(
