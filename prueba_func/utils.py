@@ -1,6 +1,6 @@
 import reflex as rx
 #import pytz
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 
 # Función para establecer el idioma del documento
 def lang() -> rx.Component:
@@ -28,8 +28,8 @@ index_meta = [
 index_meta.extend(_meta)
 
 # Metadatos para la página de cursos
-courses_title = "MoureDev | Cursos gratis de programación"
-courses_description = "Este es un listado con algunos cursos gratis para aprender programación y desarrollo de software. Python, SQL, Git..."
+courses_title = "Ejemplo | Cursos"
+courses_description = "descripcion de la pagina"
 
 courses_meta = [
     {"name": "og:title", "content": courses_title},

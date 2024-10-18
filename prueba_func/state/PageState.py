@@ -1,7 +1,6 @@
 import reflex as rx
 from prueba_func.api.api import live, featured
 from prueba_func.model.Featured import Featured
-
 USER = "esteban"
 
 class PageState(rx.State):

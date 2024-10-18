@@ -3,18 +3,12 @@ import prueba_func.constants as const
 import prueba_func.estilo.estilo as styles
 from prueba_func.pages.index import index
 from prueba_func.pages.courses import courses
-from prueba_func.api.api import repo, live
-#repo, live, featured, schedule
-from prueba_func.state.PageState import PageState
+from prueba_func.pages.cotizar import cotizar
 from prueba_func.api.api import repo, live, featured
-# , schedule
-
-
-
 
 app = rx.App(
     stylesheets=styles.STYLESHEETS,
-    style=styles.BASE_STYLES,
+    style=styles.BASE_STYLE,
     head_components=[
         rx.script(
             src=f"https://www.googletagmanager.com/gtag/js?id={const.G_TAG}"),
@@ -28,8 +22,7 @@ gtag('config', '{const.G_TAG}');
         ),
     ],
 )
-app.api.add_api_route("/repo",repo)
+
+app.api.add_api_route("/repo", repo)
 app.api.add_api_route("/live/{user}", live)
-# app.api.add_api_route("/live/{user}", live)
 app.api.add_api_route("/featured", featured)
-#app.api.add_api_route("/schedule", schedule)

@@ -1,9 +1,9 @@
 import reflex as rx
-import prueba_func.estilo.estilo as style
+import prueba_func.estilo.estilo as styles
 
 
 def title(text: str) -> rx.Component:
     return rx.heading(
-       text,
-       style=style.title_style
+        text,
+        style=styles.title_style
     )

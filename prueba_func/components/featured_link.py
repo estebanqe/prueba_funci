@@ -3,19 +3,6 @@ import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing, Color
 from prueba_func.model.Featured import Featured
 
-# def featured_link(featured: Featured) -> rx.Component:
-#     return rx.link(
-#         rx.image(
-#            src=featured.image 
-#         ),
-#         rx.text(
-#             featured.title
-#         ),
-#         href=featured.url,
-#         is_external=True
-#     )
-       
-
 
 def featured_link(featured: Featured) -> rx.Component:
     return rx.link(

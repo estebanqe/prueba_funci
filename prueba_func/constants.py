@@ -21,7 +21,9 @@ FACEBOOK="https://www.facebook.com/cesaresteban.quinaegas?mibextid=ZbWKwL"
 YOUTUBE="https://www.youtube.com/channel/UC6bOSo15WMcbCdwvDuf5p7A"
 LINKEDLINK="https://www.linkedin.com/in/cesar-esteban-qui%C3%B1a-30675a239/"
 
-
+# ubicacion
+UBI_IBARRA="https://maps.app.goo.gl/CieZ27tyF9YH337P8"
+UBI_LATA="https://maps.app.goo.gl/aSzo9QEtB4QwC12P9"
 #Catalogo
 MADERA_PERSONALIZADA="https://creyentemadera.my.canva.site/creyentemadera"
 TABLA_PICAR="https://creyentemadera.my.canva.site/creyentemadera"

@@ -26,6 +26,7 @@ class Size(Enum):
     LARGE = "1.5em"
     BIG = "2em"
     VERY_BIG = "4em"
+    SUPER_VERY_BIG = "8em"
 
 
 class Spacing(Enum):
@@ -41,7 +42,7 @@ class Spacing(Enum):
 # Styles
 
 
-BASE_STYLES = {
+BASE_STYLE = {
     "font_family": Font.DEFAULT.value,
     "font_weight": FontWeight.LIGHT.value,
     "background_color": Color.BACKGROUND.value,
@@ -64,14 +65,12 @@ BASE_STYLES = {
             "background_color": Color.SECONDARY.value
         }
     },
-    
     rx.link: {
         "color": TextColor.BODY.value,
         "text_decoration": "none",
         "_hover": {}
     }
 }
-app = rx.App(style=BASE_STYLES)
 
 navbar_title_style = dict(
     font_family=Font.LOGO.value,

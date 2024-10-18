@@ -7,8 +7,8 @@ from prueba_func.components.footer import footer
 from prueba_func.views.header import header
 from prueba_func.views.courses_links import courses_links
 from prueba_func.views.sponsors import sponsors
-from prueba_func.estilo.estilo import Size, Spacing
-#from prueba_func.state.PageState import PageState
+from prueba_func.estilo.estilo import Size
+from prueba_func.state.PageState import PageState
 
 
 @rx.page(

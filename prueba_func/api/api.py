@@ -16,3 +16,6 @@ async def live( user: str) -> bool:
 
 async def featured() -> list[Featured]:
     return SUPABASE_API.featured()
+
+# async def featured() -> list[Featured]:
+#     return SUPABASE_API.featured()

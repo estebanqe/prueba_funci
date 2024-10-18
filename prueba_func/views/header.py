@@ -6,34 +6,45 @@ from prueba_func.estilo.colors import Color, TextColor
 from prueba_func.components.link_icon import link_icon
 from prueba_func.components.info_text import info_text
 from prueba_func.components.link_button import link_button
-# from prueba_func.state.PageState import PageState
+from prueba_func.state.PageState import PageState
 
 
-def header(details=True, live=False) -> rx.Component:
+def header(details=True) -> rx.Component:
     return rx.vstack(
         rx.hstack(
-            rx.box(
-                  rx.cond(
-                    live,
-                    # PageState.live_status.live,
-                    rx.link(
-                        rx.image(
-                            src="/icons/book-solid.svg",
-                            height=Size.DEFAULT.value,
-                            width=Size.DEFAULT.value    
-                        ),
-                        href=const.CATALOGO,
-                        is_external=True,
-                        class_name="blink",
-                        border_radius="50%",
-                        padding=Size.SMALL.value,
-                        bg=Color.PURPLE.value,
-                        position="absolute",
-                        bottom="0",
-                        right="0"
-                    ),
-                ),
-                rx.avatar(
+            # rx.box(
+            #     rx.cond(
+            #         PageState.is_live,
+            #         rx.link(
+            #             rx.image(
+            #                 src="/icons/book-solid.svg",
+            #                 height=Size.DEFAULT.value,
+            #                 width=Size.DEFAULT.value    
+            #             ),
+            #             href=const.CATALOGO,
+            #             is_external=True,
+            #             class_name="blink",
+            #             border_radius="50%",
+            #             padding=Size.SMALL.value,
+            #             bg=Color.PURPLE.value,
+            #             position="absolute",
+            #             bottom="0",
+            #             right="0"
+            #         )
+            #     ),
+            #     rx.avatar(
+            #         name="Julio. César Quiña",
+            #         size=Spacing.MEDIUM_BIG.value,
+            #         src="/AvatarC.png",
+            #         radius="full",
+            #         color=TextColor.BODY.value,
+            #         bg=Color.CONTENT.value,
+            #         padding="2px",
+            #         border=f"4px solid {Color.PRIMARY.value}"
+            #     ),
+            #     position="relative"
+            # ),
+             rx.avatar(
                     name="Julio. César Quiña",
                     size=Spacing.MEDIUM_BIG.value,
                     src="/AvatarC.png",
@@ -43,9 +54,6 @@ def header(details=True, live=False) -> rx.Component:
                     padding="2px",
                     border=f"4px solid {Color.PRIMARY.value}"
                 ),
-                position="relative"
-            ),
-                
             rx.vstack(
                 rx.heading(
                     "CREYENTE",
@@ -79,14 +87,12 @@ def header(details=True, live=False) -> rx.Component:
                     ),
                     spacing=Spacing.LARGE.value,
                     padding_top=Size.SMALL.value,
-
                 ),
                 spacing=Spacing.ZERO.value,
                 align_items="start",
             ),
             align="end",
             spacing=Spacing.DEFAULT.value,
-            
         ),      
         rx.cond(  
             details,
@@ -115,12 +121,12 @@ def header(details=True, live=False) -> rx.Component:
                 width="100%",  
                 spacing=Spacing.BIG.value,
                 
-            )
-            
+            )            
         ),  
         width="100%",
         spacing=Spacing.BIG.value,                     #espacion entre las 2 secciones
         align_items="start", #alinear todo al inicio
+        on_mount=PageState.check_live
         
     )
     
