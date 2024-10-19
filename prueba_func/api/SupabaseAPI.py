@@ -1,9 +1,10 @@
 import os
 import dotenv
 from supabase import create_client, Client
-from prueba_func.model.Featured import Featured
-
-
+from prueba_func.model.Featured import Featured 
+from prueba_func.model.Herrajes_list import Herrajes_list
+from prueba_func.model.Melamina_list import Melamina_list
+from prueba_func.model.Mano_Obra_list import Mano_Obra_list
 class SupabaseAPI:
 
     dotenv.load_dotenv()
@@ -35,3 +36,24 @@ class SupabaseAPI:
                 )
 
         return featured_data
+    
+
+    def Herrajes(self) -> list[Herrajes_list]:
+
+        response = self.supabase.table(
+            "Herrajes").select("*").limit(5).execute()
+
+        herraje_data = []
+            
+        if len(response.data) > 0:
+            for herraje_item in response.data:
+                herraje_data.append(
+                    Herrajes_list(
+                        
+                        herraje=herraje_item["herraje"],
+                        unidades=herraje_item["unidades"],
+                        valor=herraje_item["valor"]
+                    )
+                )
+
+        return herraje_data

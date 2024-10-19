@@ -16,7 +16,7 @@ def navbar() -> rx.Component:
             href=Route.INDEX.value
         ),
         position="sticky",
-        bg=Color.CONTENT.value,
+        bg=Color.prueba.value,
         padding_x=Size.BIG.value,
         padding_y=Size.DEFAULT.value,
         z_index="999",
