@@ -2,6 +2,7 @@ import reflex as rx
 import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing, Color
 from prueba_func.model.Featured import Featured
+from prueba_func.model.var_herraje import var_herraje
 
 
 def featured_link(featured: Featured) -> rx.Component:

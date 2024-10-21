@@ -38,8 +38,6 @@ def acordion_datos_escrit() -> rx.Component:
                         "tenemos 3 opciones para ti",
                         "/modelos/escritorio_cajon_superior.jpg",
                         ),
-                        
-                        spacing=Spacing.VERY_SMALL.value,
                         width="100%",
                         justify="center",
                         align="center"
@@ -47,8 +45,6 @@ def acordion_datos_escrit() -> rx.Component:
                     acordion_opc_disen(),
                 ),
             ), 
-            
-            spacing=Spacing.VERY_SMALL.value,
             collapsible=True,
             width="100%",
             type="multiple",

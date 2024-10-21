@@ -4,7 +4,7 @@ import prueba_func.estilo.estilo as styles
 from prueba_func.pages.index import index
 from prueba_func.pages.courses import courses
 from prueba_func.pages.cotizar import cotizar
-from prueba_func.api.api import repo, live, featured
+from prueba_func.api.api import repo, live, featured, Herrajes
 
 app = rx.App(
     stylesheets=styles.STYLESHEETS,
@@ -26,3 +26,4 @@ gtag('config', '{const.G_TAG}');
 app.api.add_api_route("/repo", repo)
 app.api.add_api_route("/live/{user}", live)
 app.api.add_api_route("/featured", featured)
+app.api.add_api_route("/Herrajes", Herrajes)

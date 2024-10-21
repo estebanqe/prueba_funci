@@ -8,10 +8,14 @@ class Color(Enum):
     CONTENT = "#171F26"
     PURPLE = "#9146ff"
     PRO = "#FF5500"
-    prueba="#0c1a1d"
+    prueba="#C3C7CB"
 
 
 class TextColor(Enum):
     HEADER = "#F1F2F4"
     BODY = "#C3C7CB"
     FOOTER = "#A3ABB2"
+    
+    
+    PURPLE = "#9146ff"
+    PRO = "#FF5500"

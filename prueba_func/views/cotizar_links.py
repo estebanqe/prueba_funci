@@ -5,10 +5,10 @@ import prueba_func.estilo.estilo as styles
 from prueba_func.components.link_button import link_button
 from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
 from prueba_func.components.title import title
-from prueba_func.estilo.estilo import Color, TextColor, Spacing
-# from prueba_func.Presupuesto.acordion_datos_escrit import acordion_datos_escrit
+from prueba_func.estilo.estilo import Color, Spacing
 from prueba_func.Presupuesto.modelos_melamina import modelos_melamina
-
+from prueba_func.state.PageState import PageState
+from prueba_func.Presupuesto.herrajes_links import herrajes_links
 
 def cotizar_links() -> rx.Component:
     return rx.vstack(
@@ -29,17 +29,31 @@ def cotizar_links() -> rx.Component:
             Color.SECONDARY.value
         ),
         title("Modelos"),
-        # botton_modelos_mela(
-        #     "Escritorio",
-        #     "tenemos 3 opciones para ti",
-        #     "/modelos/escritorio-melamina.jpg",
-        #     const.TABLA_PICAR
-        # ),
-        rx.spacer(),      
-        # acordion_datos(),
-        rx.spacer(),
         modelos_melamina(),
         
+       
+    rx.cond(
+        PageState.herraje_info,
+        rx.vstack(
+            title("Destacado"),
+            rx.box(
+                rx.vstack(
+                    rx.foreach(
+                        PageState.herraje_info,
+                        herrajes_links
+                    ),
+                ),
+                
+                flex_direction=["column", "row"],
+                spacing=Spacing.DEFAULT.value
+            ),
+            spacing=Spacing.DEFAULT.value,
+            width="200%",
+        )
+    ), 
+        
+        
         width="100%",
-        spacing=Spacing.DEFAULT.value
+        spacing=Spacing.DEFAULT.value,
+        on_mount=PageState.herrajes_links  
     )

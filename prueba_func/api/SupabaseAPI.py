@@ -2,9 +2,7 @@ import os
 import dotenv
 from supabase import create_client, Client
 from prueba_func.model.Featured import Featured 
-from prueba_func.model.Herrajes_list import Herrajes_list
-from prueba_func.model.Melamina_list import Melamina_list
-from prueba_func.model.Mano_Obra_list import Mano_Obra_list
+from prueba_func.model.var_herraje import var_herraje
 class SupabaseAPI:
 
     dotenv.load_dotenv()
@@ -20,8 +18,7 @@ class SupabaseAPI:
 
     def featured(self) -> list[Featured]:
 
-        response = self.supabase.table(
-            "featured").select("*").order("init_date", desc=True).limit(2).execute()
+        response = self.supabase.table("featured").select("*").order("init_date", desc=True).limit(2).execute()
 
         featured_data = []
 
@@ -38,18 +35,19 @@ class SupabaseAPI:
         return featured_data
     
 
-    def Herrajes(self) -> list[Herrajes_list]:
+    def Herrajes(self) -> list[var_herraje]:
+        
+        response = self.supabase.table("Herrajes").select("*").order("herraje", desc=True).limit(5).execute()
 
-        response = self.supabase.table(
-            "Herrajes").select("*").limit(5).execute()
+        print("Respuesta de Supabase:", response.data)
+        # print("Error de Supabase:", response.error)
 
         herraje_data = []
-            
+        
         if len(response.data) > 0:
             for herraje_item in response.data:
                 herraje_data.append(
-                    Herrajes_list(
-                        
+                    var_herraje(
                         herraje=herraje_item["herraje"],
                         unidades=herraje_item["unidades"],
                         valor=herraje_item["valor"]

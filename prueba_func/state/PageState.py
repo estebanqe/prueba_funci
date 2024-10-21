@@ -1,14 +1,14 @@
 import reflex as rx
 from prueba_func.api.api import live, featured, Herrajes
 from prueba_func.model.Featured import Featured
-from prueba_func.model.Herrajes_list import Herrajes_list
+from prueba_func.model.var_herraje import var_herraje
 USER = "esteban"
 
 class PageState(rx.State):
     
     is_live: bool
     featured_info: list[Featured]
-    herraje_info: list[Herrajes_list]
+    herraje_info: list[var_herraje] = []
 
     
     async def check_live(self):

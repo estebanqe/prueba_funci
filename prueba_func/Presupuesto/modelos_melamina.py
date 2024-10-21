@@ -28,25 +28,9 @@ def modelos_melamina() -> rx.Component:
                     spacing=Spacing.VERY_SMALL.value,
                     width="100%",
                     justify="center",
-                    align="center"
-                
-                ),
-                
+                    align="center",
+                ),   
             ),
-        
-            
-            
-            
-            
-            
-            
-            
-            # content=rx.vstack(
-            #     rx.text("Detalles sobre el Escritorio: tamaño, color, material."),
-            #     rx.button("Calcular Precio", on_click=lambda: rx.window_alert("Calculando precio del Escritorio...")),
-            #     rx.button("Agregar al Carrito", on_click=lambda: rx.window_alert("Escritorio agregado al carrito.")),
-            #     rx.button("Ver Más Detalles", on_click=lambda: rx.window_alert("Mostrando más detalles del Escritorio...")),
-            # ),
         ),
         
         
@@ -75,12 +59,10 @@ def modelos_melamina() -> rx.Component:
                 ),
             ),
         ),
-        
-        spacing=Spacing.VERY_SMALL.value,
         collapsible=True,
         width="100%",
-        height="auto",
-        type="multiple",
-        variant="outline",
-        justify="center"
+        type="single",
+        color_scheme="cyan",
+        radius="small",
+        variant="ghost"
     )

@@ -1,7 +1,8 @@
 import reflex as rx
 
 
-class Herrajes_list(rx.Base):
+class var_herraje(rx.Model, table=True):
+    
     herraje: str
     unidades: int
     valor: float
