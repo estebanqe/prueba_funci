@@ -1,68 +1,68 @@
 import reflex as rx
+from prueba_func.routes import Route
+import prueba_func.constants as const
+import prueba_func.estilo.estilo as styles
+from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
+from prueba_func.components.title import title
+from prueba_func.Presupuesto.hereda.acordion_datos_escrit import acordion_datos_escrit
+from prueba_func.estilo.estilo import Color, TextColor, Spacing
 
-class FormSelectState(rx.State):
-    form_data: dict = {}
-    melamina_color: bool = False  # Variable booleana para almacenar la selección
-    color_seleccionado: str = ""  # Almacenar solo el valor de la selección
-
-    def handle_submit(self, form_data: dict):
-        """Handle the form submit."""
-        self.form_data = form_data
-        # Almacena el color seleccionado directamente
-        self.color_seleccionado = form_data.get("select", "")
+# Función para mostrar el acordeón de opciones de muebles
+def modelos_melamina() -> rx.Component:
+    return rx.accordion.root(
         
-        # Actualizamos la variable booleana según la selección
-        self.melamina_color = (self.color_seleccionado == "melamina blanca")
         
-        # Imprimimos "blanco" o "otro color" según el valor de la variable booleana
-        if self.melamina_color:
-            print("blanco")
-        else:
-            print("otro color")
-
-
-def color_material():
-    return rx.card(
-        rx.vstack(
-            rx.heading("Color"),
-            rx.form.root(
-                rx.flex(
-                    # Dropdown menu para seleccionar el tipo de melamina
-                    rx.select(
-                        ["melamina blanca", "melamina de color"],
-                        default_value="melamina blanca",
-                        name="select",
-                        required=True    
+      rx.accordion.item(
+            header=rx.accordion.header("Escritorio"),  # Utiliza el header correcto
+            content=rx.accordion.content(
+                rx.vstack(
+                    # title("Modelos"),
+                    botton_modelos_mela(
+                        "Escritorio",
+                        "tenemos 3 opciones para ti",
+                        "/modelos/escritorio-melamina.jpg",
+                        # const.TABLA_PICAR
                     ),
-                    # Botón para enviar el formulario
-                    rx.button(
-                        "Escogelo", flex="1", type="submit"
-                    ),
+                    acordion_datos_escrit(),
+                    
+                    spacing=Spacing.VERY_SMALL.value,
                     width="100%",
-                    spacing="3",
-                ),
-                on_submit=FormSelectState.handle_submit,
-                reset_on_submit=True,
+                    justify="center",
+                    align="center",
+                ),   
             ),
-            rx.divider(),
-            # Mostrar solo el valor seleccionado, sin la clave "select"
-            rx.hstack(
-                rx.heading("Escogiste:"),
-                rx.badge(
-                    FormSelectState.color_seleccionado  # Solo muestra el color seleccionado
-                ),
-            ),
-            # Mostrar el valor de la variable booleana como "valor blanco" o "valor color" usando rx.cond
-            rx.hstack(
-                rx.heading("valor:"),
-                rx.cond(
-                    FormSelectState.melamina_color,
-                    rx.badge("valor blanco"),
-                    rx.badge("valor color")
-                ),
-            ),
-            align_items="left",
-            width="100%",
         ),
+        
+        
+        
+        # Opción 2: Velador
+        rx.accordion.item(
+            header="Velador",
+            content=rx.vstack(
+                rx.text("Detalles sobre el Velador: tamaño, color, material."),
+                rx.button("Calcular Precio", on_click=lambda: rx.window_alert("Calculando precio del Velador...")),
+                rx.button("Agregar al Carrito", on_click=lambda: rx.window_alert("Velador agregado al carrito.")),
+                rx.button("Ver Más Detalles", on_click=lambda: rx.window_alert("Mostrando más detalles del Velador...")),
+            ),
+        ),
+        
+        
+        # Opción 3: Mueble de TV
+        rx.accordion.item(
+            header="Mueble de TV",
+            content=rx.box(
+                rx.vstack(
+                    rx.text("Detalles sobre el Mueble de TV: tamaño, color, material."),
+                    rx.button("Calcular Precio", on_click=lambda: rx.window_alert("Calculando precio del Mueble de TV...")),
+                    rx.button("Agregar al Carrito", on_click=lambda: rx.window_alert("Mueble de TV agregado al carrito.")),
+                    rx.button("Ver Más Detalles", on_click=lambda: rx.window_alert("Mostrando más detalles del Mueble de TV...")),
+                ),
+            ),
+        ),
+        collapsible=True,
         width="100%",
+        type="single",
+        color_scheme="cyan",
+        radius="small",
+        variant="ghost"
     )

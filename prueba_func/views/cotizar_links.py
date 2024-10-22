@@ -6,7 +6,7 @@ from prueba_func.components.link_button import link_button
 from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
 from prueba_func.components.title import title
 from prueba_func.estilo.estilo import Color, Spacing
-from prueba_func.Presupuesto.modelos_melamina import modelos_melamina
+from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.state.PageState import PageState
 from prueba_func.Presupuesto.herrajes_links import herrajes_links
 

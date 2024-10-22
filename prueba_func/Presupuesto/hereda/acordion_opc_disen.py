@@ -2,12 +2,12 @@ import reflex as rx
 import prueba_func.constants as const
 import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing,TextColor
-from prueba_func.Presupuesto.color_material import color_material
-from prueba_func.Presupuesto.grosor_material import grosor_material
+from prueba_func.Presupuesto.opciones_usuario.material.color_material import color_material
+from prueba_func.Presupuesto.opciones_usuario.material.grosor_material import grosor_material
 
 
 
-def acordion_opc_disen() -> rx.Component:
+def acordion_material_melamina() -> rx.Component:
     return rx.accordion.root(
             rx.accordion.item(
                 header=rx.accordion.header("material"),  # Utiliza el header correcto

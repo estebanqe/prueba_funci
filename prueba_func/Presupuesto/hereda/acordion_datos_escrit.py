@@ -3,7 +3,7 @@ import prueba_func.constants as const
 import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing,TextColor
 from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
-from prueba_func.Presupuesto.acordion_opc_disen import acordion_opc_disen
+from prueba_func.Presupuesto.hereda.acordion_opc_disen import acordion_material_melamina
 
 
 
@@ -25,7 +25,7 @@ def acordion_datos_escrit() -> rx.Component:
                         justify="center",
                         align="center"
                     ),
-                    acordion_opc_disen(),
+                    acordion_material_melamina(),
                 ),
             ),
             rx.accordion.item(
@@ -42,7 +42,7 @@ def acordion_datos_escrit() -> rx.Component:
                         justify="center",
                         align="center"
                     ),
-                    acordion_opc_disen(),
+                    acordion_material_melamina(),
                 ),
             ), 
             collapsible=True,
