@@ -2,6 +2,9 @@ import reflex as rx
 import prueba_func.constants as const
 import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing,TextColor
+from prueba_func.Presupuesto.color_material import color_material
+from prueba_func.Presupuesto.grosor_material import grosor_material
+
 
 
 def acordion_opc_disen() -> rx.Component:
@@ -10,11 +13,8 @@ def acordion_opc_disen() -> rx.Component:
                 header=rx.accordion.header("material"),  # Utiliza el header correcto
                 content=rx.accordion.content(
                     rx.vstack(
-                        rx.list(
-                            rx.list.item("color"),
-                            rx.list.item("grosor"),
-                        ),
-      
+                        color_material(),
+                        grosor_material(),
                         spacing=Spacing.VERY_SMALL.value,
                         width="100%",
                         justify="center",
@@ -58,6 +58,6 @@ def acordion_opc_disen() -> rx.Component:
             spacing=Spacing.VERY_SMALL.value,
             collapsible=True,
             width="100%",
-            type="multiple",
+            type="single",
             variant="ghost"
         )

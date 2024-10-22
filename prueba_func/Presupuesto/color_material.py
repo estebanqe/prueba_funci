@@ -53,14 +53,14 @@ def color_material():
                 ),
             ),
             # Mostrar el valor de la variable booleana como "valor blanco" o "valor color" usando rx.cond
-            rx.hstack(
-                rx.heading("valor:"),
-                rx.cond(
-                    FormSelectState.melamina_color,
-                    rx.badge("valor blanco"),
-                    rx.badge("valor color")
-                ),
-            ),
+            # rx.hstack(
+            #     rx.heading("valor:"),
+            #     rx.cond(
+            #         FormSelectState.melamina_color,
+            #         rx.badge("valor blanco"),
+            #         rx.badge("valor color")
+            #     ),
+            # ),
             align_items="left",
             width="100%",
         ),
