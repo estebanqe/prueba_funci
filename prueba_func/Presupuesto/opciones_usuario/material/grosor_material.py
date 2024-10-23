@@ -16,15 +16,15 @@ class FormSelectState(rx.State):
         
         # Imprimimos "blanco" o "otro color" según el valor de la variable booleana
         if self.melamina_color:
-            print("blanco")
+            print("15 mm")
         else:
-            print("otro color")
+            print("18 mm")
 
 
 def grosor_material():
     return rx.card(
         rx.vstack(
-            rx.heading("Color"),
+            rx.heading("Grosor"),
             rx.form.root(
                 rx.flex(
                     # Dropdown menu para seleccionar el tipo de melamina
@@ -53,14 +53,14 @@ def grosor_material():
                 ),
             ),
             # Mostrar el valor de la variable booleana como "valor blanco" o "valor color" usando rx.cond
-            # rx.hstack(
-            #     rx.heading("valor:"),
-            #     rx.cond(
-            #         FormSelectState.melamina_color,
-            #         rx.badge("valor blanco"),
-            #         rx.badge("valor color")
-            #     ),
-            # ),
+            rx.hstack(
+                rx.heading("valor:"),
+                rx.cond(
+                    FormSelectState.melamina_color,
+                    rx.badge("15 mm"),
+                    rx.badge("18 mm")
+                ),
+            ),
             align_items="left",
             width="100%",
         ),
