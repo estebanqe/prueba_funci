@@ -9,8 +9,9 @@ from prueba_func.estilo.estilo import Color, Spacing
 from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.state.PageState import PageState
 from prueba_func.Presupuesto.herrajes_links import herrajes_links
+from prueba_func.Presupuesto.muebles_links import muebles_links
 
-def cotizar_links() -> rx.Component:
+def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
     return rx.vstack(
         link_button(
             "Pagina Principal",
@@ -31,29 +32,30 @@ def cotizar_links() -> rx.Component:
         title("Modelos"),
         modelos_melamina(),
         
-       
-    rx.cond(
-        PageState.herraje_info,
-        rx.vstack(
-            title("Destacado"),
-            rx.box(
-                rx.vstack(
-                    rx.foreach(
-                        PageState.herraje_info,
-                        herrajes_links
-                    ),
-                ),
-                
-                flex_direction=["column", "row"],
-                spacing=Spacing.DEFAULT.value
-            ),
-            spacing=Spacing.DEFAULT.value,
-            width="200%",
-        )
-    ), 
+        # rx.cond(
+        #     PageState.herraje_info,
+        #     rx.vstack(
+        #         title("Destacado"),
+        #         rx.box(
+        #             rx.vstack(
+        #                 rx.foreach(
+        #                     PageState.herraje_info,
+        #                     herrajes_links,
+        #                 ),
+        #             ),
+        #             flex_direction=["column", "row"],
+        #             spacing=Spacing.DEFAULT.value
+        #         ),
+        #         spacing=Spacing.DEFAULT.value,
+        #         width="200%",
+        #     )
+        # ), 
         
-        
+        # Título para los Muebles y el componente dinámico de muebles_links
+        title("Muebles"),
+        muebles_links(),  # Llama al componente muebles_links que contiene los tabs
+
         width="100%",
         spacing=Spacing.DEFAULT.value,
-        on_mount=PageState.herrajes_links  
+        on_mount=PageState.cargar_muebles,  # Llama a cargar los muebles al montar la página
     )

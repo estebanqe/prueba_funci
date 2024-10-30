@@ -2,7 +2,9 @@ import os
 import dotenv
 from supabase import create_client, Client
 from prueba_func.model.Featured import Featured 
-from prueba_func.model.var_herraje import var_herraje
+from prueba_func.model.HERRAJES import HERRAJES
+from prueba_func.model.MUEBLES import MUEBLES
+
 class SupabaseAPI:
 
     dotenv.load_dotenv()
@@ -35,9 +37,9 @@ class SupabaseAPI:
         return featured_data
     
 
-    def Herrajes(self) -> list[var_herraje]:
+    def Herrajes(self) -> list[HERRAJES]:
         
-        response = self.supabase.table("Herrajes").select("*").order("herraje", desc=True).limit(5).execute()
+        response = self.supabase.table("HERRAJES").select("*").order("herraje").limit(10).execute()
 
         print("Respuesta de Supabase:", response.data)
         # print("Error de Supabase:", response.error)
@@ -47,11 +49,46 @@ class SupabaseAPI:
         if len(response.data) > 0:
             for herraje_item in response.data:
                 herraje_data.append(
-                    var_herraje(
+                    HERRAJES(
                         herraje=herraje_item["herraje"],
-                        unidades=herraje_item["unidades"],
-                        valor=herraje_item["valor"]
+                        descripcion=herraje_item["descripcion"],
+                        # valor=herraje_item["valor"]
                     )
                 )
 
         return herraje_data
+    
+    
+    def Muebles(self) -> list[MUEBLES]:
+        
+        response = self.supabase.table("MUEBLES").select("*").order("mueble").limit(5).execute()
+
+        print("Respuesta de Supabase:", response.data)
+        # print("Error de Supabase:", response.error)
+
+        mueble_data = []
+        
+        if len(response.data) > 0:
+            for mueble_item in response.data:
+                mueble_data.append(
+                    MUEBLES(
+                        mueble=mueble_item["mueble"],
+                        descripcion=mueble_item["descripcion"],
+                        # valor=herraje_item["valor"]
+                    )
+                )
+
+        return mueble_data
+   
+    
+    def obtener_muebles(self) -> list[MUEBLES]:
+    # """Función para obtener los datos de la columna 'mueble' de la tabla 'MUEBLES' en Supabase."""
+        try:
+            # Realiza la consulta en Supabase
+            response = self.supabase.table("MUEBLES").select("mueble").execute()
+            # Obtiene solo los nombres de los muebles como una lista
+            muebles_fila = [registro["mueble"] for registro in response.data]
+            return muebles_fila
+        except Exception as e:
+            print(f"Error obteniendo muebles: {e}")
+            return []

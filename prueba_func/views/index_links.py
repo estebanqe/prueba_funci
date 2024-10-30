@@ -45,21 +45,21 @@ def index_links() -> rx.Component:
             const.LINKEDLINK
             ),
         
-        # rx.cond(
-        #     PageState.featured_info,
-        #     rx.vstack(
-        #         title("Destacado"),
-        #         rx.flex(
-        #             rx.foreach(
-        #                 PageState.featured_info,
-        #                 featured_link
-        #             ),
-        #             flex_direction=["column", "row"],
-        #             spacing=Spacing.DEFAULT.value
-        #         ),
-        #         spacing=Spacing.DEFAULT.value
-        #     )
-        # ),
+        rx.cond(
+            PageState.featured_info,
+            rx.vstack(
+                title("Destacado"),
+                rx.flex(
+                    rx.foreach(
+                        PageState.featured_info,
+                        featured_link
+                    ),
+                    flex_direction=["column", "row"],
+                    spacing=Spacing.DEFAULT.value
+                ),
+                spacing=Spacing.DEFAULT.value
+            )
+        ),
         
         title("Cátalogo De Materiales"),
          link_button(
