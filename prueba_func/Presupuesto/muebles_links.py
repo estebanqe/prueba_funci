@@ -59,7 +59,7 @@ def muebles_links() -> rx.Component:
                                             height="auto"
                                         )
                                 ),
-                                rx.text("No hay imágenes disponibles.")  # Mensaje si no hay imágenes
+                                rx.text("No hay imágenes disponibles.",color=TextColor.BODY.value)  # Mensaje si no hay imágenes
                             ),
                             spacing=Spacing.SMALL.value,  # Espaciado entre imágenes
                             align_items="center",
