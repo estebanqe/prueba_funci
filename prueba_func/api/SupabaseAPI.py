@@ -74,6 +74,7 @@ class SupabaseAPI:
                     MUEBLES(
                         mueble=mueble_item["mueble"],
                         descripcion=mueble_item["descripcion"],
+                        image=mueble_item["image"]
                         # valor=herraje_item["valor"]
                     )
                 )
@@ -91,4 +92,16 @@ class SupabaseAPI:
             return muebles_fila
         except Exception as e:
             print(f"Error obteniendo muebles: {e}")
+            return []
+
+   
+   
+    def muestra_muebles(self) -> list[str]:
+        try:
+            response = self.supabase.table("MUEBLES").select("image").execute()
+            # Regresa una lista de imágenes
+            imagen_mueble = [imagen_reg["image"] for imagen_reg in response.data]
+            return imagen_mueble
+        except Exception as e:
+            print(f"Error obteniendo imagen muebles: {e}")
             return []

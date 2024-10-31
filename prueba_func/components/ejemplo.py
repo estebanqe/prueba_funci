@@ -210,3 +210,188 @@ def muebles_links() -> rx.Component:
 # Llama a la carga de muebles al montar el componente
 on_mount = PageState.load_muebles
 
+
+
+
+
+
+rx.grid(
+    rx.scroll_area(
+        rx.flex(
+            rx.text(
+                """Three fundamental aspects of typography are legibility, readability, and
+        aesthetics. Although in a non-technical sense "legible" and "readable"
+        are often used synonymously, typographically they are separate but
+        related concepts.""",
+                size="2",
+                trim="both",
+            ),
+            rx.text(
+                """Legibility describes how easily individual characters can be
+        distinguished from one another. It is described by Walter Tracy as "the
+        quality of being decipherable and recognisable". For instance, if a "b"
+        and an "h", or a "3" and an "8", are difficult to distinguish at small
+        sizes, this is a problem of legibility.""",
+                size="2",
+                trim="both",
+            ),
+            padding="8px",
+            padding_right="48px",
+            direction="column",
+            spacing="4",
+        ),
+        type="always",
+        scrollbars="vertical",
+        style={"height": 150},
+    ),
+    rx.scroll_area(
+        rx.flex(
+            rx.text(
+                """Three fundamental aspects of typography are legibility, readability, and
+        aesthetics. Although in a non-technical sense "legible" and "readable"
+        are often used synonymously, typographically they are separate but
+        related concepts.""",
+                size="2",
+                trim="both",
+            ),
+            rx.text(
+                """Legibility describes how easily individual characters can be
+        distinguished from one another. It is described by Walter Tracy as "the
+        quality of being decipherable and recognisable". For instance, if a "b"
+        and an "h", or a "3" and an "8", are difficult to distinguish at small
+        sizes, this is a problem of legibility.""",
+                size="2",
+                trim="both",
+            ),
+            padding="8px",
+            spacing="4",
+            style={"width": 700},
+        ),
+        type="always",
+        scrollbars="horizontal",
+        style={"height": 150},
+    ),
+    rx.scroll_area(
+        rx.flex(
+            rx.text(
+                """Three fundamental aspects of typography are legibility, readability, and
+        aesthetics. Although in a non-technical sense "legible" and "readable"
+        are often used synonymously, typographically they are separate but
+        related concepts.""",
+                size="2",
+                trim="both",
+            ),
+            rx.text(
+                """Legibility describes how easily individual characters can be
+        distinguished from one another. It is described by Walter Tracy as "the
+        quality of being decipherable and recognisable". For instance, if a "b"
+        and an "h", or a "3" and an "8", are difficult to distinguish at small
+        sizes, this is a problem of legibility.""",
+                size="2",
+                trim="both",
+            ),
+            padding="8px",
+            spacing="4",
+            style={"width": 400},
+        ),
+        type="always",
+        scrollbars="both",
+        style={"height": 150},
+    ),
+    columns="3",
+    spacing="2",
+)
+
+
+
+
+codigo sin impresion 
+
+
+
+
+
+import reflex as rx
+import prueba_func.constants as const
+from prueba_func.estilo.estilo import Color, TextColor, Spacing, Size
+from prueba_func.components.link_material import link_material
+from prueba_func.Presupuesto.muestra_muebles_link import muestra_muebles_link
+from prueba_func.components.title import title
+from prueba_func.state.PageState import PageState
+
+def muebles_links() -> rx.Component:
+    return rx.tabs.root(
+        rx.tabs.list(
+            rx.foreach(
+                PageState.mueble_fila_info,
+                lambda mueble: 
+                    rx.tabs.trigger(
+                        rx.text(mueble),
+                        value=mueble,
+                        color=TextColor.BODY.value,
+                        padding_right=Size.VERY_BIG.value,
+                        align="center"  # Corrección de 'aling' a 'align'
+                    )
+            )
+        ),
+        
+        
+        
+        
+        rx.foreach(
+            PageState.mueble_fila_info,
+            lambda mueble:
+                rx.tabs.content(
+                    rx.text(
+                        f"Descripción para {mueble}",
+                        color=TextColor.BODY.value,
+                        padding_left=Size.VERY_BIG.value
+                    ),  
+                    rx.vstack(
+                        rx.button(
+                            f"el botón de {mueble} #1",
+                            color=TextColor.BODY.value
+                        ),
+                        
+                        # Lista de imágenes del mueble en un contenedor vertical
+                        rx.vstack(
+                            rx.foreach(
+                                PageState.mueble_imagen_info,
+                                lambda image: 
+                                    rx.image(
+                                        src=image,
+                                        width="100px",
+                                        height="auto"
+                                    )
+                            ),
+                            spacing=Spacing.SMALL.value,  # Espaciado entre imágenes
+                            align_items="center",
+                            width="100%",
+                        ),
+                        rx.button(
+                            f"el botón de {mueble} #2",
+                            color=TextColor.BODY.value
+                        ),
+                        
+                        rx.image(
+                            src="https://krmdgbcxyzatizbztubr.supabase.co/storage/v1/object/public/prueba_imagen/muestras_muebles/velador_muestra.webp",
+                            border_radius=Size.DEFAULT.value,
+                            background=Color.CONTENT.value,
+                            width="100%",
+                        ),
+                    ),
+                    value=mueble,
+                    align_items="start",
+                    width="100%",
+                )
+        ),
+        rx.spacer(), 
+        default_value=rx.cond(
+            PageState.mueble_fila_info,
+            PageState.mueble_fila_info[0],
+            ""
+        ),
+        orientation="vertical",
+        spacing=Spacing.BIG.value,
+    )
+

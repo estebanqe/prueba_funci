@@ -9,7 +9,10 @@ from prueba_func.estilo.estilo import Color, Spacing
 from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.state.PageState import PageState
 from prueba_func.Presupuesto.herrajes_links import herrajes_links
+from prueba_func.Presupuesto.informacion_fila import informacion_fila
 from prueba_func.Presupuesto.muebles_links import muebles_links
+
+
 
 def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
     return rx.vstack(
@@ -29,27 +32,29 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
             False,
             Color.SECONDARY.value
         ),
+
+
         title("Modelos"),
         modelos_melamina(),
         
-        # rx.cond(
-        #     PageState.herraje_info,
-        #     rx.vstack(
-        #         title("Destacado"),
-        #         rx.box(
-        #             rx.vstack(
-        #                 rx.foreach(
-        #                     PageState.herraje_info,
-        #                     herrajes_links,
-        #                 ),
-        #             ),
-        #             flex_direction=["column", "row"],
-        #             spacing=Spacing.DEFAULT.value
-        #         ),
-        #         spacing=Spacing.DEFAULT.value,
-        #         width="200%",
-        #     )
-        # ), 
+        rx.cond(
+            PageState.mueble_imagen_info,
+            rx.vstack(
+                title("Destacado"),
+                rx.box(
+                    rx.vstack(
+                        rx.foreach(
+                            PageState.mueble_imagen_info,
+                            informacion_fila,
+                        ),
+                    ),
+                    flex_direction=["column", "row"],
+                    spacing=Spacing.DEFAULT.value
+                ),
+                spacing=Spacing.DEFAULT.value,
+                width="200%",
+            )
+        ), 
         
         # Título para los Muebles y el componente dinámico de muebles_links
         title("Muebles"),

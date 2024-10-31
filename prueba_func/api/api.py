@@ -30,3 +30,7 @@ async def Muebles() -> list[MUEBLES]:
 
 async def Muebles_fila() -> list[MUEBLES]:
     return SUPABASE_API.obtener_muebles()
+
+
+async def Muebles_imagen() -> list[MUEBLES]:
+    return SUPABASE_API.muestra_muebles()

@@ -35,7 +35,7 @@
     
     
 import reflex as rx
-from prueba_func.api.api import live, featured, Herrajes, Muebles, Muebles_fila
+from prueba_func.api.api import live, featured, Herrajes, Muebles, Muebles_fila, Muebles_imagen
 from prueba_func.model.Featured import Featured
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
@@ -48,6 +48,7 @@ class PageState(rx.State):
     herraje_info: list[HERRAJES] = []
     mueble_info: list[MUEBLES] = []
     mueble_fila_info: list[str] = []  # Lista de nombres de muebles
+    mueble_imagen_info: list[MUEBLES] = []
     
     async def initialize_state(self):
         await self.check_live()
@@ -55,6 +56,7 @@ class PageState(rx.State):
         await self.herrajes_links()
         await self.muebles_links()
         await self.cargar_muebles()
+        await self.imagen_muebles()
 
     async def check_live(self):
         self.is_live = await live(USER)
@@ -70,3 +72,6 @@ class PageState(rx.State):
 
     async def cargar_muebles(self):
         self.mueble_fila_info = await Muebles_fila()
+        
+    async def imagen_muebles(self):
+        self.mueble_imagen_info = await Muebles_imagen()
