@@ -5,6 +5,7 @@ from prueba_func.components.link_material import link_material
 from prueba_func.Presupuesto.muestra_muebles_link import muestra_muebles_link
 from prueba_func.components.title import title
 from prueba_func.state.PageState import PageState
+from prueba_func.api.SupabaseAPI import SupabaseAPI
 
 
 
@@ -31,6 +32,8 @@ def muebles_links() -> rx.Component:
                 rx.text("No hay muebles disponibles.")  # Mensaje si no hay muebles
             )
         ),
+        
+        
         rx.foreach(
             PageState.mueble_fila_info,
             lambda mueble:
@@ -54,7 +57,7 @@ def muebles_links() -> rx.Component:
                                     PageState.mueble_imagen_info,
                                     lambda image: 
                                         rx.image(
-                                            src=image,
+                                            src=PageState.mueble_imagen_info,
                                             width="100px",
                                             height="auto"
                                         )
@@ -82,6 +85,8 @@ def muebles_links() -> rx.Component:
                     width="100%",
                 )
         ),
+        
+     
         rx.spacer(), 
         default_value=rx.cond(
             PageState.mueble_fila_info,

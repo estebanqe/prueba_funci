@@ -8,7 +8,7 @@ from prueba_func.components.title import title
 from prueba_func.estilo.estilo import Color, Spacing
 from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.state.PageState import PageState
-from prueba_func.Presupuesto.herrajes_links import herrajes_links
+from prueba_func.Presupuesto.muestra_muebles_link import muestra_muebles_link
 from prueba_func.Presupuesto.informacion_fila import informacion_fila
 from prueba_func.Presupuesto.muebles_links import muebles_links
 
@@ -32,7 +32,21 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
             False,
             Color.SECONDARY.value
         ),
-
+        rx.cond(
+            PageState.mueble_info,
+            rx.vstack(
+                title("Destacado"),
+                rx.flex(
+                    rx.foreach(
+                        PageState.mueble_info,
+                        muestra_muebles_link
+                    ),
+                    flex_direction=["column", "row"],
+                    spacing=Spacing.DEFAULT.value
+                ),
+                spacing=Spacing.DEFAULT.value
+            )
+        ),
 
         title("Modelos"),
         modelos_melamina(),
