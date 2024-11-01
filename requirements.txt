@@ -1,4 +1,5 @@
 reflex==0.6.2
 supabase
 python-dotenv
-PIL
+Pillow
+requests
