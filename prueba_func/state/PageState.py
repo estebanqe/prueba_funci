@@ -1,41 +1,5 @@
-# import reflex as rx
-# from prueba_func.api.api import live, featured, Herrajes, Muebles, Muebles_fila
-# from prueba_func.model.Featured import Featured
-# from prueba_func.model.HERRAJES import HERRAJES
-# from prueba_func.model.MUEBLES import MUEBLES
-# USER = "esteban"
-
-# class PageState(rx.State):
-    
-#     is_live: bool
-#     featured_info: list[Featured]
-#     herraje_info: list[HERRAJES] = []
-#     mueble_info: list[MUEBLES] = []
-#     mueble_fila_info : list [MUEBLES] = []
-
-    
-#     async def check_live(self):
-#         self.is_live = await live(USER)
-
-#     async def featured_links(self):
-#         self.featured_info = await featured()
-        
-#     async def herrajes_links(self):
-#         self.herraje_info = await Herrajes()
-        
-#     async def muebles_links(self):
-#         self.mueble_info = await Muebles()
-    
-    
-#     async def cargar_muebles(self):
-#         self.mueble_fila_info = await Muebles_fila()
-
-
-    
-    
-    
 import reflex as rx
-from prueba_func.api.api import live, featured, Herrajes, Muebles, Muebles_fila, Muebles_imagen
+from prueba_func.api.api import live, featured, Herrajes, api_Muebles, Muebles_fila, Imagen_fila,Descripcion_fila
 from prueba_func.model.Featured import Featured
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
@@ -48,7 +12,10 @@ class PageState(rx.State):
     herraje_info: list[HERRAJES] = []
     mueble_info: list[MUEBLES] = []
     mueble_fila_info: list[str] = []  # Lista de nombres de muebles
-    mueble_imagen_info: list[MUEBLES] = []
+    imagen_fila_info: list[str] = []
+    descripcion_fila_info: list[str] = []  # 
+    
+        
     
     async def initialize_state(self):
         await self.check_live()
@@ -56,7 +23,8 @@ class PageState(rx.State):
         await self.herrajes_links()
         await self.muebles_links()
         await self.cargar_muebles()
-        await self.imagen_muebles()
+        await self.cargar_ima()
+        await self.cargar_descripcion()
 
     async def check_live(self):
         self.is_live = await live(USER)
@@ -68,10 +36,18 @@ class PageState(rx.State):
         self.herraje_info = await Herrajes()
 
     async def muebles_links(self):
-        self.mueble_info = await Muebles()
-
+        self.mueble_info = await api_Muebles()
+        print(self.mueble_info)
+        
+    
     async def cargar_muebles(self):
         self.mueble_fila_info = await Muebles_fila()
-        
-    async def imagen_muebles(self):
-        self.mueble_imagen_info = await Muebles_imagen()
+        print(self.imagen_fila_info)
+
+    async def cargar_ima(self):
+            self.imagen_fila_info = await Imagen_fila()
+            print(self.imagen_fila_info)
+            
+    async def cargar_descripcion(self):
+        self.descripcion_fila_info = await Descripcion_fila()
+        print(self.descripcion_fila_info)

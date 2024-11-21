@@ -1,18 +1,11 @@
 import reflex as rx
 import prueba_func.constants as const
 from prueba_func.estilo.estilo import Color, TextColor, Spacing, Size
-from prueba_func.components.link_material import link_material
-from prueba_func.Presupuesto.muestra_muebles_link import muestra_muebles_link
-from prueba_func.components.title import title
 from prueba_func.state.PageState import PageState
-from prueba_func.api.SupabaseAPI import SupabaseAPI
-
 
 
 def muebles_links() -> rx.Component:
-    # Imprimir el contenido de los estados para depuración
-    print("Contenido de mueble_fila_info:", PageState.mueble_fila_info)
-    print("Contenido de mueble_imagen_info:", PageState.mueble_imagen_info)
+    
 
     return rx.tabs.root(
         rx.tabs.list(
@@ -33,7 +26,6 @@ def muebles_links() -> rx.Component:
             )
         ),
         
-        
         rx.foreach(
             PageState.mueble_fila_info,
             lambda mueble:
@@ -52,17 +44,17 @@ def muebles_links() -> rx.Component:
                         # Lista de imágenes del mueble en un contenedor vertical
                         rx.vstack(
                             rx.cond(
-                                PageState.mueble_imagen_info,
+                                PageState.imagen_fila_info,  # Verifica si existe información en mueble_imagen_info
                                 rx.foreach(
-                                    PageState.mueble_imagen_info,
+                                    PageState.imagen_fila_info,  # Itera sobre las imágenes
                                     lambda image: 
                                         rx.image(
-                                            src=PageState.mueble_imagen_info,
+                                            src= PageState.imagen_fila_info[0],  # Cada imagen en la lista
                                             width="100px",
                                             height="auto"
                                         )
                                 ),
-                                rx.text("No hay imágenes disponibles.",color=TextColor.BODY.value)  # Mensaje si no hay imágenes
+                                rx.text("No hay imágenes disponibles.", color=TextColor.BODY.value)  # Si no hay imágenes
                             ),
                             spacing=Spacing.SMALL.value,  # Espaciado entre imágenes
                             align_items="center",
@@ -86,7 +78,6 @@ def muebles_links() -> rx.Component:
                 )
         ),
         
-     
         rx.spacer(), 
         default_value=rx.cond(
             PageState.mueble_fila_info,
@@ -96,3 +87,5 @@ def muebles_links() -> rx.Component:
         orientation="vertical",
         spacing=Spacing.BIG.value,
     )
+
+    

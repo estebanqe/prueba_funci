@@ -68,7 +68,7 @@ def modelos_melamina() -> rx.Component:
     )
 
 
-def herrajes_links (var_herraje_item: HERRAJES) -> rx.Component:
+def herrajes_links (var_herraje_item: HER   RAJES) -> rx.Component:
     return rx.hstack(
             rx.text(
                 f"herraje: {var_herraje_item.herraje}",

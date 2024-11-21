@@ -4,8 +4,7 @@ from supabase import create_client, Client
 from prueba_func.model.Featured import Featured 
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
-from PIL import Image
-import requests
+
 
 
 
@@ -67,9 +66,6 @@ class SupabaseAPI:
         
         response = self.supabase.table("MUEBLES").select("*").order("mueble").limit(50).execute()
 
-        print("Respuesta de Supabase:", response.data)
-        # print("Error de Supabase:", response.error)
-
         mueble_data = []
         
         if len(response.data) > 0:
@@ -78,8 +74,7 @@ class SupabaseAPI:
                     MUEBLES(
                         mueble=mueble_item["mueble"],
                         descripcion=mueble_item["descripcion"],
-                        image=mueble_item["image"]
-                        # valor=herraje_item["valor"]
+                        url_image=mueble_item["url_image"]
                     )
                 )
 
@@ -98,29 +93,32 @@ class SupabaseAPI:
             print(f"Error obteniendo muebles: {e}")
             return []
 
-   
-   
-    def muestra_muebles(self) -> list[Image.Image]:
+    def obtener_descripcion(self) -> list[MUEBLES]:
+    # """Función para obtener los datos de la columna 'mueble' de la tabla 'MUEBLES' en Supabase."""
         try:
-            # Realiza la consulta a Supabase para obtener las imágenes
-            response = self.supabase.table("MUEBLES").select("image").execute()
-            
-            # Regresa una lista de imágenes
-            imagen_mueble = [imagen_reg["image"] for imagen_reg in response.data]
-            
-            loaded_images = []  # Lista para almacenar las imágenes cargadas
-
-            # Itera sobre cada URL de imagen
-            for url in imagen_mueble:
-                try:
-                    # Carga la imagen desde la URL
-                    image_new = Image.open(requests.get(url, stream=True).raw)
-                    loaded_images.append(image_new)  # Almacena la imagen cargada
-                except Exception as img_error:
-                    print(f"Error al cargar la imagen desde {url}: {img_error}")
-                    loaded_images.append(None)  # Agrega None si hay un error
-
-            return loaded_images  # Retorna la lista de imágenes cargadas
+            # Realiza la consulta en Supabase
+            response = self.supabase.table("MUEBLES").select("descripcion").execute()
+            # Obtiene solo los nombres de los muebles como una lista
+            muebles_descripcion = [registro_des["descripcion"] for registro_des in response.data]
+            return muebles_descripcion
         except Exception as e:
-            print(f"Error obteniendo imagen muebles: {e}")
+            print(f"Error obteniendo muebles: {e}")
             return []
+   
+   
+    def obtener_ima(self, url_image: str) -> list:
+        try:
+            # Realiza la consulta seleccionando solo la columna deseada
+            response = self.supabase.table("MUEBLES").select(url_image).execute()
+            
+            # Verifica si la consulta fue exitosa y si hay datos
+            if response.data:
+                # Extrae los valores de la columna y los devuelve como lista
+                return [registro[url_image] for registro in response.data]
+            else:
+                print("No hay datos disponibles en la tabla MUEBLES.")
+                return []
+        except Exception as e:
+            print(f"Error obteniendo la columna {url_image}: {e}")
+            return []
+
