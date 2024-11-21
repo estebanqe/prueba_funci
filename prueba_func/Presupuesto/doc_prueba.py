@@ -1,79 +1,82 @@
 import reflex as rx
-from prueba_func.model.MUEBLES import MUEBLES
-from prueba_func.api.api import api_Muebles
+# from prueba_func.model.MUEBLES import MUEBLES
+# from prueba_func.api.api import api_Muebles
 
-class State(rx.State):
-    # Lista de muebles correctamente tipada
-    muebles: list[MUEBLES] = []  # La lista de muebles, inicialmente vacía
-    tab_selected: str = "tab0"  # La pestaña seleccionada
-    error: str = ""  # Variable para manejar errores
+# class State(rx.State):
+#     # Lista de muebles correctamente tipada
+#     muebles: list[MUEBLES] = []  # La lista de muebles, inicialmente vacía
+#     tab_selected: str = "tab0"  # La pestaña seleccionada
+#     error: str = ""  # Variable para manejar errores
 
-    def change_tab(self, value: str):
-        """Actualiza la pestaña seleccionada."""
-        self.tab_selected = value
+#     def change_tab(self, value: str):
+#         """Actualiza la pestaña seleccionada."""
+#         self.tab_selected = value
 
-    async def initialize(self):
-        """Carga inicial de datos."""
-        await self.load_muebles()
+#     async def initialize(self):
+#         """Carga inicial de datos."""
+#         await self.load_muebles()
     
-    async def load_muebles(self):
-        """Carga los muebles usando la función api_Muebles."""
-        try:
-            # Se asegura de que muebles sea una lista de objetos MUEBLES
-            self.muebles = await api_Muebles()
-            if not self.muebles:
-                self.error = "No se encontraron muebles en la base de datos."
-        except Exception as e:
-            self.error = f"Error al cargar muebles: {str(e)}"
+#     async def load_muebles(self):
+#         """Carga los muebles usando la función api_Muebles."""
+#         try:
+#             # Se asegura de que muebles sea una lista de objetos MUEBLES
+#             self.muebles = await api_Muebles()
+#             if not self.muebles:
+#                 self.error = "No se encontraron muebles en la base de datos."
+#         except Exception as e:
+#             self.error = f"Error al cargar muebles: {str(e)}"
 
-def doc_prueba(MUEBLES=[]):
-    """Genera la interfaz de usuario para los muebles."""
-    return rx.container(
-        rx.cond(
-            State.error != "",
-            rx.text(State.error, color="red"),  # Muestra el mensaje de error si ocurre
-            rx.cond(
-                State.muebles,  # Verifica si la lista de muebles no está vacía
-                rx.tabs.root(
-                    rx.tabs.list(
-                        rx.foreach(
-                            State.muebles,
-                            lambda mueble, index: rx.tabs.trigger(
-                                mueble.mueble, value=f"tab{index}", color="white"
-                            )
-                        )
-                    ),
-                    rx.foreach(
-                        State.muebles,
-                        lambda mueble, index: rx.tabs.content(
-                            rx.vstack(
-                                rx.heading(mueble.mueble, color="white"),
-                                rx.image(
-                                    src=mueble.url_image,
-                                    height="200px",
-                                    width="auto",
-                                ),
-                                rx.text(mueble.descripcion, color="white"),
-                            ),
-                            value=f"tab{index}"
-                        )
-                    ),
-                    value=State.tab_selected,
-                    on_change=State.change_tab,
-                    default_value="tab0"
-                ),
-                rx.text("Cargando muebles...", color="gray")
-            )
-        )
-    )
-
-
-# Configuración de la aplicación Reflex
+# def doc_prueba(MUEBLES=[]):
+#     """Genera la interfaz de usuario para los muebles."""
+#     return rx.container(
+#         rx.cond(
+#             State.error != "",
+#             rx.text(State.error, color="red"),  # Muestra el mensaje de error si ocurre
+#             rx.cond(
+#                 State.muebles,  # Verifica si la lista de muebles no está vacía
+#                 rx.tabs.root(
+#                     rx.tabs.list(
+#                         rx.foreach(
+#                             State.muebles,
+#                             lambda mueble, index: rx.tabs.trigger(
+#                                 mueble.mueble, value=f"tab{index}", color="white"
+#                             )
+#                         )
+#                     ),
+#                     rx.foreach(
+#                         State.muebles,
+#                         lambda mueble, index: rx.tabs.content(
+#                             rx.vstack(
+#                                 rx.heading(mueble.mueble, color="white"),
+#                                 rx.image(
+#                                     src=mueble.url_image,
+#                                     height="200px",
+#                                     width="auto",
+#                                 ),
+#                                 rx.text(mueble.descripcion, color="white"),
+#                             ),
+#                             value=f"tab{index}"
+#                         )
+#                     ),
+#                     value=State.tab_selected,
+#                     on_change=State.change_tab,
+#                     default_value="tab0"
+#                 ),
+#                 rx.text("Cargando muebles...", color="gray")
+#             )
+#         )
+#     )
 
 
-# app = rx.App()
-# app.add_page(doc_prueba, route="/", on_load=initialize)
-# app.compile()
+
+
+
+
+
+
+
+
+
 
 
 
@@ -135,3 +138,59 @@ def doc_prueba(MUEBLES=[]):
 
 
 
+import reflex as rx
+from prueba_func.api.SupabaseAPI import SupabaseAPI
+from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.api.api import api_Muebles
+
+SUPABASE_API = SupabaseAPI()
+
+class State(rx.State):
+    muebles: list[MUEBLES] = []
+    tab_selected: str = "tab0"
+
+    async def load_muebles(self):
+        # Cargar los muebles desde la API
+        self.muebles = await api_Muebles()
+
+    def change_tab(self, value: str):
+        self.tab_selected = value
+
+# Usamos on_mount para cargar los datos al montar el componente
+def doc_prueba():
+    return rx.container(
+       
+        # Componente de Tabs
+        rx.tabs.root(
+            rx.tabs.list(
+                rx.foreach(
+                    State.muebles,
+                    lambda mueble, index: rx.tabs.trigger(
+                        mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
+                        value=f"tab{index}",
+                        color="white"
+                    )
+                )
+            ),
+            
+            rx.foreach(
+                State.muebles,
+                lambda mueble, index: rx.tabs.content(
+                    rx.vstack(
+                        rx.heading(mueble.mueble, color="white"),
+                        rx.image(
+                            src=mueble.url_image,
+                            height="200px",
+                            width="auto",
+                        ),
+                        rx.text(mueble.descripcion, color="white")
+                    ),
+                    value=f"tab{index}",
+                )
+            ),
+            value=State.tab_selected,
+            on_change=State.change_tab,
+            default_value="tab0",
+            on_mount=State.load_muebles,
+        ),
+    )

@@ -78,22 +78,8 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         mostrar_columna(),
           
         
-        title("prueba"),
-        # rx.cond(
-        #     PageState.mueble_info,
-        #     rx.vstack(
-        #         title("ejemplo de prueba"),
-        #         rx.box(
-        #             rx.foreach(
-        #                 PageState.mueble_info,
-        #                 doc_prueba
-        #             ),
-        #             flex_direction=["column", "row"],
-        #             spacing=Spacing.DEFAULT.value
-        #         ),
-        #         spacing=Spacing.DEFAULT.value
-        #     )
-        # ),
+        title("prueba con mi papai"),
+      
         doc_prueba(),
 
         

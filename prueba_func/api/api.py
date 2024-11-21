@@ -18,6 +18,8 @@ async def live( user: str) -> bool:
         return True
     return False
 
+async def api_Muebles() -> list[MUEBLES]:
+    return SUPABASE_API.Muebles()
 
 async def featured() -> list[Featured]:
     return SUPABASE_API.featured()
@@ -25,8 +27,7 @@ async def featured() -> list[Featured]:
 async def Herrajes() -> list[HERRAJES]:
     return SUPABASE_API.Herrajes()
 
-async def api_Muebles() -> list[MUEBLES]:
-    return SUPABASE_API.Muebles()
+
 
 async def Muebles_fila() -> list[MUEBLES]:
     return SUPABASE_API.obtener_muebles()

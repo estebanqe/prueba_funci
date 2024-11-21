@@ -21,6 +21,34 @@ class SupabaseAPI:
                 self.SUPABASE_URL, self.SUPABASE_KEY
             )
 
+    
+    
+    def Muebles(self) -> list[MUEBLES]:
+        
+        response = self.supabase.table("MUEBLES").select("*").order("mueble").limit(50).execute()
+
+        mueble_data = []
+        
+        if len(response.data) > 0:
+            for mueble_item in response.data:
+                mueble_data.append(
+                    MUEBLES(
+                        mueble=mueble_item["mueble"],
+                        descripcion=mueble_item["descripcion"],
+                        url_image=mueble_item["url_image"]
+                    )
+                )
+
+        return mueble_data
+   
+    
+    
+    
+    
+    
+    
+    
+    
     def featured(self) -> list[Featured]:
 
         response = self.supabase.table("featured").select("*").order("init_date", desc=True).limit(2).execute()
@@ -62,23 +90,24 @@ class SupabaseAPI:
         return herraje_data
     
     
-    def Muebles(self) -> list[MUEBLES]:
-        
-        response = self.supabase.table("MUEBLES").select("*").order("mueble").limit(50).execute()
-
-        mueble_data = []
-        
-        if len(response.data) > 0:
-            for mueble_item in response.data:
-                mueble_data.append(
-                    MUEBLES(
-                        mueble=mueble_item["mueble"],
-                        descripcion=mueble_item["descripcion"],
-                        url_image=mueble_item["url_image"]
-                    )
-                )
-
-        return mueble_data
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
     
     def obtener_muebles(self) -> list[MUEBLES]:
