@@ -37,7 +37,7 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         
        
         title("prueba con mi papai"),
-        doc_prueba(),
+        # doc_prueba(),
 
         
   

@@ -1,78 +1,87 @@
 import reflex as rx
 from prueba_func.api.SupabaseAPI import SupabaseAPI
 from prueba_func.model.MODELOS import MODELOS
-from prueba_func.estilo.estilo import Size, Spacing,TextColor
+from prueba_func.estilo.estilo import Size, Spacing, TextColor
 from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
 from prueba_func.Presupuesto.hereda.acordion_opc_disen import acordion_material_melamina
 from prueba_func.api.api import api_Modelos
 
+# Instancia de Supabase API
 SUPABASE_API = SupabaseAPI()
 
-class State(rx.State):
+class ModeloState(rx.State):
+    """State para manejar modelos y selección en el acordeón."""
+
     modelos: list[MODELOS] = []
-    acor_selected: str = "tab0"
+    acor_selected: str = "acor_0"
 
     async def load_modelos(self):
-        # Cargar los muebles desde la API
-        self.modelo = await api_Modelos()
+        """Carga modelos desde la API."""
+        try:
+            print("Cargando modelos...")
+            self.modelos = await api_Modelos()
+            print(f"Modelos cargados: {len(self.modelos)}")
+        except Exception as e:
+            print(f"Error al cargar modelos: {e}")
+            self.modelos = []  # Estado consistente si ocurre un error
 
-    def change_acor(self, value: str):
-        self.acor_selected = value
+    def change_selected(self, value: str):
+        """Cambia el elemento seleccionado en el acordeón."""
+        print(f"Nuevo valor seleccionado: {value}")
+        self.acor_selected = value  # Actualiza el estado seleccionado
+
+
+    def get_selected_model(self):
+        """Obtiene el modelo correspondiente al valor seleccionado."""
+        # Busca el modelo correspondiente al valor seleccionado en el acordeón
+        selected_model = next((modelo for modelo in self.modelos if f"item_{modelo.id}" == self.acor_selected), None)
+        return selected_model
+
 
 def acordion_datos_escrit() -> rx.Component:
+    """Construye el componente del acordeón."""
     return rx.container(
+        rx.text(
+            ModeloState.acor_selected,  # Directamente del estado
+            color="white",  
+        ),
         rx.accordion.root(
-            rx.accordion.item(
-                
-                rx.foreach(
-                        State.modelos,
-                        lambda modelo, index: 
-                            rx.accordion.header(
-                                modelo.modelo,  # Usamos el nombre del mueble como título de la pestaña
-                                value=f"tab{index}",
-                                color="white"
-                            )
-                ),
-                
-                content=rx.accordion.content(
-                    rx.vstack(
-                    
-                    botton_modelos_mela(
-                        "Escritorio cajon lateral",
-                        "tenemos 3 opciones para ti",
-                        "/modelos/escritorio_cajon_lateral.jpeg",
+            # Renderizar dinámicamente los items del acordeón
+            rx.foreach(
+                ModeloState.modelos,
+                lambda modelo, index: rx.accordion.item(
+                    header=rx.accordion.header(
+                        rx.cond(
+                            modelo.modelo,
+                            modelo.modelo,  # Si modelo.modelo tiene valor
+                            "Sin nombre",    # Si modelo.modelo es None o vacío
                         ),
-                        
-                        spacing=Spacing.VERY_SMALL.value,
-                        width="100%",
-                        justify="center",
-                        align="center"
+                        color="white",
                     ),
-                    acordion_material_melamina(),
+                    content=rx.accordion.content(
+                        rx.vstack(
+                            rx.image(
+                                src=modelo.url_image,
+                                height="200px",
+                            ),
+                            rx.text(
+                                modelo.descripcion,
+                                color="white",
+                            ),
+                        ),
+                    ),
+                    value=f"item_{index}",
                 ),
             ),
-            rx.accordion.item(
-                header=rx.accordion.header("escritorio cajon superior",color="white"),  # Utiliza el header correcto
-                content=rx.accordion.content(
-                    rx.vstack(
-                    
-                    botton_modelos_mela(
-                        "Escritorio cajon superior",
-                        "tenemos 3 opciones para ti",
-                        "/modelos/escritorio_cajon_superior.jpg",
-                        ),
-                        width="100%",
-                        justify="center",
-                        align="center"
-                    ),
-                    acordion_material_melamina(),
-                ),
-            ), 
             collapsible=True,
             width="100%",
-            type="multiple",
-            variant="ghost"
-        )
-        
+            variant="ghost",
+            # Cambia el estado cuando se selecciona un elemento
+            on_value_change=lambda value: ModeloState.change_selected(value),
+            type="multiple",  # Permite múltiples secciones abiertas
         ),
-        
+        padding="2em",
+        # Llama a la función asincrónica en el evento on_mount
+        on_mount=ModeloState.load_modelos,
+        async_handlers=["on_mount"],  # Marca on_mount como asincrónico
+    )

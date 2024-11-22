@@ -5,7 +5,7 @@ from prueba_func.api.api import api_Muebles
 
 SUPABASE_API = SupabaseAPI()
 
-class State(rx.State):
+class MuebleState(rx.State):
     muebles: list[MUEBLES] = []
     tab_selected: str = "tab0"
 
@@ -26,7 +26,7 @@ def doc_prueba():
                 
                     rx.tabs.list(
                         rx.foreach(
-                            State.muebles,
+                            MuebleState.muebles,
                             lambda mueble, index: 
                                 rx.tabs.trigger(
                                     mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
@@ -39,7 +39,7 @@ def doc_prueba():
                 
                 
                 rx.foreach(
-                    State.muebles,
+                    MuebleState.muebles,
                     lambda mueble, index: rx.tabs.content(
                         rx.vstack(
                             rx.heading(mueble.mueble, color="white"),
@@ -53,10 +53,10 @@ def doc_prueba():
                         value=f"tab{index}",
                     )
                 ),
-                value=State.tab_selected,
-                on_change=State.change_tab,
+                value=MuebleState.tab_selected,
+                on_change=MuebleState.change_tab,
                 default_value="tab0",
-                on_mount=State.load_muebles,
+                on_mount=MuebleState.load_muebles,
             ),
         scrollbars="horizontal",
         type="always",

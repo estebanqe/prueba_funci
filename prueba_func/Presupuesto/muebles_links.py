@@ -20,24 +20,30 @@ class State(rx.State):
 
 def muebles_links() -> rx.Component:
     return rx.container(
-       
         # Componente de Tabs
         rx.tabs.root(
-            rx.tabs.list(
-                rx.foreach(
-                    State.muebles,
-                    lambda mueble, index: rx.tabs.trigger(
-                        mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
-                        value=f"tab{index}",
-                        color="white"
-                    )
-                    
+            rx.scroll_area(
+                rx.tabs.list(
+                    rx.foreach(
+                        State.muebles,
+                        lambda mueble, index: rx.tabs.trigger(
+                            mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
+                            value=f"tab{index}",
+                            color="white"
+                        )
+                    ),
+                    size="2",
+                    width="100%",
+                    padding=Size.SMALL.value,
                 ),
-                size="2",
-                width="100%",
-                padding=Size.SMALL.value,
-                
+                type="always",
+                scrollbars="horizontal",
+                style=rx.Style({
+                    "background_color": rx.color("white", 7),
+                    "border_color": rx.color("blue", 1),
+                })
             ),
+            
             
             rx.foreach(
                 State.muebles,
@@ -49,7 +55,7 @@ def muebles_links() -> rx.Component:
                                 rx.image(
                                     src=mueble.url_image,
                                     height="auto",
-                                    width="350px",
+                                    width="250px",
                                 ),
                                 rx.text(mueble.descripcion, color="white"),
                                 
@@ -71,6 +77,8 @@ def muebles_links() -> rx.Component:
             on_mount=State.load_muebles,
             orientation="horizontal",
             spacing=Spacing.BIG.value,
+            width="100%",
+            
         ),
-        
+        width="100%",
     )

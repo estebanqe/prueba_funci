@@ -54,10 +54,11 @@ class SupabaseAPI:
         if len(response.data) > 0:
             for modelo_item in response.data:
                 modelo_data.append(
-                    MUEBLES(
+                    MODELOS(
                         modelo=modelo_item["modelo"],
-                        # descripcion=modelo_item["descripcion"],
-                        # url_image=modelo_item["url_image"]
+                        descripcion=modelo_item["descripcion"],
+                        url_image=modelo_item["url_image"],
+                        id_muebles=modelo_item["id_muebles"]
                     )
                 )
 
