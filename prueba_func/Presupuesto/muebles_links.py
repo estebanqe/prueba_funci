@@ -41,15 +41,20 @@ def muebles_links() -> rx.Component:
                 style=rx.Style({
                     "background_color": rx.color("white", 7),
                     "border_color": rx.color("blue", 1),
-                })
+                    
+                }),
+                #  padding_top=Size.SMALL.value,
+                padding_y=Size.SMALL.value
             ),
-            
+            # padding_y=Size.SMALL.value,
             
             rx.foreach(
                 State.muebles,
                 lambda mueble, index: 
                     rx.tabs.content(
+                        
                         rx.hstack(
+                            
                             rx.vstack(
                                 rx.heading(mueble.mueble, color="white",width="100%",),
                                 rx.image(
@@ -63,7 +68,7 @@ def muebles_links() -> rx.Component:
                             
                             acordion_datos_escrit(),
                            
-                            
+                            padding_y=Size.DEFAULT.value
                             
                         ),
                         

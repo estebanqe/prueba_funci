@@ -79,35 +79,3 @@ def acordion_datos_escrit() -> rx.Component:
         ),
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    rx.tabs.root(
-        rx.scroll_area(
-            rx.tabs.list(
-                rx.tabs.trigger("Tab 1", value="tab1"),
-                rx.tabs.trigger("Tab 2", value="tab2"),
-            ),
-            type="always", 
-            scrollbars="horizontal",
-            style={"width": "100%"}
-        ),
-        rx.tabs.content(
-            rx.text("item on tab 1"),
-            value="tab1",
-        ),
-        rx.tabs.content(
-            rx.text("item on tab 2"), 
-            value="tab2",
-        ),  
-    )
