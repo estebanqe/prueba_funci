@@ -78,7 +78,7 @@ def acordion_datos_escrit() -> rx.Component:
             variant="ghost",
             # Cambia el estado cuando se selecciona un elemento
             on_value_change=lambda value: ModeloState.change_selected(value),
-            type="multiple",  # Permite múltiples secciones abiertas
+            type="single",  # Permite múltiples secciones abiertas
         ),
         padding="2em",
         # Llama a la función asincrónica en el evento on_mount
