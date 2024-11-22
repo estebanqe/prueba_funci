@@ -3,6 +3,8 @@ import prueba_func.constants as const
 from prueba_func.model.Featured import Featured
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.model.MODELOS import MODELOS
+
 from .SupabaseAPI import SupabaseAPI
 
 
@@ -21,6 +23,12 @@ async def live( user: str) -> bool:
 async def api_Muebles() -> list[MUEBLES]:
     return SUPABASE_API.Muebles()
 
+async def api_Modelos() -> list[MODELOS]:
+    return SUPABASE_API.Modelos()
+
+
+
+
 async def featured() -> list[Featured]:
     return SUPABASE_API.featured()
 
@@ -28,14 +36,3 @@ async def Herrajes() -> list[HERRAJES]:
     return SUPABASE_API.Herrajes()
 
 
-
-async def Muebles_fila() -> list[MUEBLES]:
-    return SUPABASE_API.obtener_muebles()
-
-
-async def Imagen_fila() -> list[MUEBLES]:
-    return SUPABASE_API.obtener_ima()
-
-
-async def Descripcion_fila() -> list[MUEBLES]:
-    return SUPABASE_API.obtener_descripcion()

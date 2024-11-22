@@ -4,6 +4,7 @@ from supabase import create_client, Client
 from prueba_func.model.Featured import Featured 
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.model.MODELOS import MODELOS
 
 
 
@@ -42,6 +43,25 @@ class SupabaseAPI:
         return mueble_data
    
     
+    
+    
+    def Modelos(self) -> list[MODELOS]:
+        
+        response = self.supabase.table("MODELOS").select("*").order("modelo").limit(50).execute()
+
+        modelo_data = []
+        
+        if len(response.data) > 0:
+            for modelo_item in response.data:
+                modelo_data.append(
+                    MUEBLES(
+                        modelo=modelo_item["modelo"],
+                        # descripcion=modelo_item["descripcion"],
+                        # url_image=modelo_item["url_image"]
+                    )
+                )
+
+        return modelo_data
     
     
     
@@ -92,62 +112,3 @@ class SupabaseAPI:
     
     
     
-    
-    
-    
-    
-    
-    
-    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-    
-    def obtener_muebles(self) -> list[MUEBLES]:
-    # """Función para obtener los datos de la columna 'mueble' de la tabla 'MUEBLES' en Supabase."""
-        try:
-            # Realiza la consulta en Supabase
-            response = self.supabase.table("MUEBLES").select("mueble").execute()
-            # Obtiene solo los nombres de los muebles como una lista
-            muebles_fila = [registro["mueble"] for registro in response.data]
-            return muebles_fila
-        except Exception as e:
-            print(f"Error obteniendo muebles: {e}")
-            return []
-
-    def obtener_descripcion(self) -> list[MUEBLES]:
-    # """Función para obtener los datos de la columna 'mueble' de la tabla 'MUEBLES' en Supabase."""
-        try:
-            # Realiza la consulta en Supabase
-            response = self.supabase.table("MUEBLES").select("descripcion").execute()
-            # Obtiene solo los nombres de los muebles como una lista
-            muebles_descripcion = [registro_des["descripcion"] for registro_des in response.data]
-            return muebles_descripcion
-        except Exception as e:
-            print(f"Error obteniendo muebles: {e}")
-            return []
-   
-   
-    def obtener_ima(self, url_image: str) -> list:
-        try:
-            # Realiza la consulta seleccionando solo la columna deseada
-            response = self.supabase.table("MUEBLES").select(url_image).execute()
-            
-            # Verifica si la consulta fue exitosa y si hay datos
-            if response.data:
-                # Extrae los valores de la columna y los devuelve como lista
-                return [registro[url_image] for registro in response.data]
-            else:
-                print("No hay datos disponibles en la tabla MUEBLES.")
-                return []
-        except Exception as e:
-            print(f"Error obteniendo la columna {url_image}: {e}")
-            return []
-

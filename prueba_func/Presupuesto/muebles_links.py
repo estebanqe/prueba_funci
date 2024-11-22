@@ -1,91 +1,76 @@
 import reflex as rx
-import prueba_func.constants as const
-from prueba_func.estilo.estilo import Color, TextColor, Spacing, Size
-from prueba_func.state.PageState import PageState
+from prueba_func.api.SupabaseAPI import SupabaseAPI
+from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.estilo.estilo import Color, Spacing, TextColor,Size
+from prueba_func.api.api import api_Muebles
+from prueba_func.Presupuesto.hereda.acordion_datos_escrit import acordion_datos_escrit
 
+SUPABASE_API = SupabaseAPI()
+
+class State(rx.State):
+    muebles: list[MUEBLES] = []
+    tab_selected: str = "tab0"
+
+    async def load_muebles(self):
+        # Cargar los muebles desde la API
+        self.muebles = await api_Muebles()
+
+    def change_tab(self, value: str):
+        self.tab_selected = value
 
 def muebles_links() -> rx.Component:
-    
-
-    return rx.tabs.root(
-        rx.tabs.list(
-            rx.cond(
-                PageState.mueble_fila_info,
+    return rx.container(
+       
+        # Componente de Tabs
+        rx.tabs.root(
+            rx.tabs.list(
                 rx.foreach(
-                    PageState.mueble_fila_info,
-                    lambda mueble: 
-                        rx.tabs.trigger(
-                            rx.text(mueble),
-                            value=mueble,
-                            color=TextColor.BODY.value,
-                            padding_right=Size.VERY_BIG.value,
-                            align="center"  # Corrección de 'aling' a 'align'
-                        )
+                    State.muebles,
+                    lambda mueble, index: rx.tabs.trigger(
+                        mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
+                        value=f"tab{index}",
+                        color="white"
+                    )
+                    
                 ),
-                rx.text("No hay muebles disponibles.")  # Mensaje si no hay muebles
-            )
-        ),
-        
-        rx.foreach(
-            PageState.mueble_fila_info,
-            lambda mueble:
-                rx.tabs.content(
-                    rx.text(
-                        f"Descripción para {mueble}",
-                        color=TextColor.BODY.value,
-                        padding_left=Size.VERY_BIG.value
-                    ),  
-                    rx.vstack(
-                        rx.button(
-                            f"el botón de {mueble} #1",
-                            color=TextColor.BODY.value
-                        ),
-                        
-                        # Lista de imágenes del mueble en un contenedor vertical
-                        rx.vstack(
-                            rx.cond(
-                                PageState.imagen_fila_info,  # Verifica si existe información en mueble_imagen_info
-                                rx.foreach(
-                                    PageState.imagen_fila_info,  # Itera sobre las imágenes
-                                    lambda image: 
-                                        rx.image(
-                                            src= PageState.imagen_fila_info[0],  # Cada imagen en la lista
-                                            width="100px",
-                                            height="auto"
-                                        )
+                size="2",
+                width="100%",
+                padding=Size.SMALL.value,
+                
+            ),
+            
+            rx.foreach(
+                State.muebles,
+                lambda mueble, index: 
+                    rx.tabs.content(
+                        rx.hstack(
+                            rx.vstack(
+                                rx.heading(mueble.mueble, color="white",width="100%",),
+                                rx.image(
+                                    src=mueble.url_image,
+                                    height="auto",
+                                    width="350px",
                                 ),
-                                rx.text("No hay imágenes disponibles.", color=TextColor.BODY.value)  # Si no hay imágenes
+                                rx.text(mueble.descripcion, color="white"),
+                                
                             ),
-                            spacing=Spacing.SMALL.value,  # Espaciado entre imágenes
-                            align_items="center",
-                            width="100%",
-                        ),
-                        rx.button(
-                            f"el botón de {mueble} #2",
-                            color=TextColor.BODY.value
+                            
+                            acordion_datos_escrit(),
+                           
+                            
+                            
                         ),
                         
-                        rx.image(
-                            src="https://krmdgbcxyzatizbztubr.supabase.co/storage/v1/object/public/prueba_imagen/muestras_muebles/velador_muestra.webp",
-                            border_radius=Size.DEFAULT.value,
-                            background=Color.CONTENT.value,
-                            width="100%",
-                        ),
-                    ),
-                    value=mueble,
-                    align_items="start",
-                    width="100%",
+                    value=f"tab{index}",
+                    # padding_left=Size.VERY_BIG.value,
                 )
+            ),
+            value=State.tab_selected,
+            on_change=State.change_tab,
+            default_value="tab0",
+            on_mount=State.load_muebles,
+            orientation="horizontal",
+            spacing=Spacing.BIG.value,
         ),
         
-        rx.spacer(), 
-        default_value=rx.cond(
-            PageState.mueble_fila_info,
-            PageState.mueble_fila_info[0],
-            ""
-        ),
-        orientation="vertical",
-        spacing=Spacing.BIG.value,
     )
-
-    

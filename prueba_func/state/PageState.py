@@ -1,5 +1,5 @@
 import reflex as rx
-from prueba_func.api.api import live, featured, Herrajes, api_Muebles, Muebles_fila, Imagen_fila,Descripcion_fila
+from prueba_func.api.api import live, featured, Herrajes, api_Muebles
 from prueba_func.model.Featured import Featured
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
@@ -11,9 +11,7 @@ class PageState(rx.State):
     featured_info: list[Featured] = []
     herraje_info: list[HERRAJES] = []
     mueble_info: list[MUEBLES] = []
-    mueble_fila_info: list[str] = []  # Lista de nombres de muebles
-    imagen_fila_info: list[str] = []
-    descripcion_fila_info: list[str] = []  # 
+    
     
         
     
@@ -22,9 +20,6 @@ class PageState(rx.State):
         await self.featured_links()
         await self.herrajes_links()
         await self.muebles_links()
-        await self.cargar_muebles()
-        await self.cargar_ima()
-        await self.cargar_descripcion()
 
     async def check_live(self):
         self.is_live = await live(USER)
@@ -40,14 +35,4 @@ class PageState(rx.State):
         print(self.mueble_info)
         
     
-    async def cargar_muebles(self):
-        self.mueble_fila_info = await Muebles_fila()
-        print(self.imagen_fila_info)
-
-    async def cargar_ima(self):
-            self.imagen_fila_info = await Imagen_fila()
-            print(self.imagen_fila_info)
-            
-    async def cargar_descripcion(self):
-        self.descripcion_fila_info = await Descripcion_fila()
-        print(self.descripcion_fila_info)
+    
