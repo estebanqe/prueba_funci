@@ -38,6 +38,12 @@ class ModeloState(rx.State):
         return selected_model
 
 
+
+
+
+
+
+
 def acordion_datos_escrit() -> rx.Component:
     """Construye el componente del acordeón."""
     return rx.container(
@@ -71,8 +77,12 @@ def acordion_datos_escrit() -> rx.Component:
                         ),
                     ),
                     value=f"item_{index}",
+                    width="100%",
+                    aling="center",
                 ),
+                
             ),
+            
             collapsible=True,
             width="100%",
             variant="ghost",

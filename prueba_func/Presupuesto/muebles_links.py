@@ -68,8 +68,9 @@ def muebles_links() -> rx.Component:
                             
                             acordion_datos_escrit(),
                            
-                            padding_y=Size.DEFAULT.value
-                            
+                            padding_y=Size.DEFAULT.value,
+                            padding_x=Size.ZERO.value,
+                            flex_direction=["column", "row"],
                         ),
                         
                     value=f"tab{index}",

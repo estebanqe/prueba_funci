@@ -28,7 +28,6 @@ async def api_Modelos() -> list[MODELOS]:
 
 
 
-
 async def featured() -> list[Featured]:
     return SUPABASE_API.featured()
 

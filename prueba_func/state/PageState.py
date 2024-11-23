@@ -4,6 +4,7 @@ from prueba_func.model.Featured import Featured
 from prueba_func.model.HERRAJES import HERRAJES
 from prueba_func.model.MUEBLES import MUEBLES
 
+
 USER = "esteban"
 
 class PageState(rx.State):
@@ -11,15 +12,14 @@ class PageState(rx.State):
     featured_info: list[Featured] = []
     herraje_info: list[HERRAJES] = []
     mueble_info: list[MUEBLES] = []
-    
-    
-        
+         
     
     async def initialize_state(self):
         await self.check_live()
         await self.featured_links()
         await self.herrajes_links()
         await self.muebles_links()
+        await self.modelos_links()
 
     async def check_live(self):
         self.is_live = await live(USER)
@@ -34,5 +34,4 @@ class PageState(rx.State):
         self.mueble_info = await api_Muebles()
         print(self.mueble_info)
         
-    
-    
+  

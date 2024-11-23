@@ -41,8 +41,6 @@ class SupabaseAPI:
                 )
 
         return mueble_data
-   
-    
     
     
     def Modelos(self) -> list[MODELOS]:
@@ -63,6 +61,48 @@ class SupabaseAPI:
                 )
 
         return modelo_data
+    
+    
+   
+    # def SQL_Modelos(self) -> list[MUEBLES,MODELOS]:
+    # # Ejecutar la consulta SQL personalizada con JOIN
+    #     response = self.supabase.query("""
+    #         SELECT 
+    #         "MUEBLES".mueble,
+    #         "MUEBLES".descripcion,
+    #         "MUEBLES".url_image,
+    #         "MODELOS".modelo,
+    #         "MODELOS".url_image AS imagen_modelo
+    #         FROM
+    #         "MUEBLES"
+    #         INNER JOIN "MODELOS" ON "MUEBLES".id = "MODELOS".id_muebles
+    #         WHERE "MUEBLES".id = 1;
+    #     """).execute()
+
+    #     # Crear una lista para almacenar los muebles procesados
+    #     sql_mueble_data = []
+
+    #     # Verificar si la consulta devolvió datos
+    #     if len(response.data) > 0:
+    #         for mueble_item in response.data:
+    #             # Agregar cada elemento al mueble_data como un objeto de tipo MODELOS
+    #             sql_mueble_data.append(
+    #                 MUEBLES,MODELOS(
+    #                     mueble=mueble_item["mueble"],
+    #                     descripcion=mueble_item["descripcion"],
+    #                     url_image=mueble_item["url_image"],
+    #                     modelo=mueble_item["modelo"],
+    #                     imagen_modelo=mueble_item["imagen_modelo"]
+    #                 )
+    #             )
+
+    #     return sql_mueble_data
+
+
+
+    
+    
+    
     
     
     
@@ -92,9 +132,6 @@ class SupabaseAPI:
     def Herrajes(self) -> list[HERRAJES]:
         
         response = self.supabase.table("HERRAJES").select("*").order("herraje").limit(10).execute()
-
-        print("Respuesta de Supabase:", response.data)
-        # print("Error de Supabase:", response.error)
 
         herraje_data = []
         

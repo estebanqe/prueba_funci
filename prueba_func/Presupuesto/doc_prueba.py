@@ -1,11 +1,13 @@
 import reflex as rx
 from prueba_func.api.SupabaseAPI import SupabaseAPI
 from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.estilo.estilo import Color, Spacing, TextColor,Size
 from prueba_func.api.api import api_Muebles
+from prueba_func.Presupuesto.hereda.acordion_datos_escrit import acordion_datos_escrit
 
 SUPABASE_API = SupabaseAPI()
 
-class MuebleState(rx.State):
+class State(rx.State):
     muebles: list[MUEBLES] = []
     tab_selected: str = "tab0"
 
@@ -16,49 +18,72 @@ class MuebleState(rx.State):
     def change_tab(self, value: str):
         self.tab_selected = value
 
-# Usamos on_mount para cargar los datos al montar el componente
-def doc_prueba():
+def doc_prueba() -> rx.Component:
     return rx.container(
-        
-       rx.scroll_area(
-            # Componente de Tabs
-            rx.tabs.root(
-                
-                    rx.tabs.list(
-                        rx.foreach(
-                            MuebleState.muebles,
-                            lambda mueble, index: 
-                                rx.tabs.trigger(
-                                    mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
-                                    value=f"tab{index}",
-                                    color="white"
-                                )
+        # Componente de Tabs
+        rx.tabs.root(
+            rx.scroll_area(
+                rx.tabs.list(
+                    rx.foreach(
+                        State.muebles,
+                        lambda mueble, index: rx.tabs.trigger(
+                            mueble.mueble,  # Usamos el nombre del mueble como título de la pestaña
+                            value=f"tab{index}",
+                            color="white"
                         )
                     ),
-                
-                
-                
-                rx.foreach(
-                    MuebleState.muebles,
-                    lambda mueble, index: rx.tabs.content(
-                        rx.vstack(
-                            rx.heading(mueble.mueble, color="white"),
-                            rx.image(
-                                src=mueble.url_image,
-                                height="200px",
-                                width="auto",
-                            ),
-                            rx.text(mueble.descripcion, color="white")
-                        ),
-                        value=f"tab{index}",
-                    )
+                    size="2",
+                    width="100%",
+                    padding=Size.SMALL.value,
                 ),
-                value=MuebleState.tab_selected,
-                on_change=MuebleState.change_tab,
-                default_value="tab0",
-                on_mount=MuebleState.load_muebles,
+                type="always",
+                scrollbars="horizontal",
+                style=rx.Style({
+                    "background_color": rx.color("white", 7),
+                    "border_color": rx.color("blue", 1),
+                    
+                }),
+                #  padding_top=Size.SMALL.value,
+                padding_y=Size.SMALL.value
             ),
-        scrollbars="horizontal",
-        type="always",
-       ),
+            # padding_y=Size.SMALL.value,
+            
+            rx.foreach(
+                State.muebles,
+                lambda mueble, index: 
+                    rx.tabs.content(
+                        
+                        rx.hstack(
+                            
+                            rx.vstack(
+                                rx.heading(mueble.mueble, color="white",width="100%",),
+                                rx.image(
+                                    src=mueble.url_image,
+                                    height="auto",
+                                    width="250px",
+                                ),
+                                rx.text(mueble.descripcion, color="white"),
+                                
+                            ),
+                            
+                            acordion_datos_escrit(),
+                           
+                            padding_y=Size.DEFAULT.value
+                            
+                        ),
+                        
+                    value=f"tab{index}",
+                    # padding_left=Size.VERY_BIG.value,
+                )
+            ),
+            value=State.tab_selected,
+            on_change=State.change_tab,
+            default_value="tab0",
+            on_mount=State.load_muebles,
+            orientation="horizontal",
+            spacing=Spacing.BIG.value,
+            width="100%",
+            
+        ),
+        width="100%",
     )

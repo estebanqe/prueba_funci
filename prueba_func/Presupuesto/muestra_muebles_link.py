@@ -2,6 +2,7 @@ import reflex as rx
 import prueba_func.estilo.estilo as styles
 from prueba_func.estilo.estilo import Size, Spacing, Color
 from prueba_func.model.MUEBLES import MUEBLES
+from prueba_func.model.MODELOS import MODELOS
 
 
 def muestra_muebles_link(muestra_muebles: MUEBLES) -> rx.Component:
