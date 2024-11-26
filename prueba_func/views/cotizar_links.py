@@ -40,16 +40,16 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         # modelos_melamina(),
         
        
-        # title("prueba con mi papai"),
+        # title("Muestra de contenido del archivo prueba"),
         # doc_prueba(),
         
         
          # Título para los Muebles y el componente dinámico de muebles_links
-        title("Muebles"),
+        title("Nuestros Modelos de Muebles"),
         tabs_muebles(),  # Llama al componente muebles_links que contiene los tabs
 
 
-        title("muestra de valores"), 
+        title("Valores de la tabla Mubeles"), 
         rx.cond(
             PageState.mueble_info,
             rx.vstack(
@@ -66,7 +66,7 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         ),
         
         
-        title("modelos"),
+        title("VAlores de la tabla Modelos"),
         rx.cond(
             PageState.modelo_info,
             rx.vstack(
