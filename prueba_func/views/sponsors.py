@@ -1,6 +1,6 @@
 import reflex as rx
 import prueba_func.constants as const
-from prueba_func.estilo.estilo import Size
+from prueba_func.estilo.estilo import Size,Spacing
 from prueba_func.components.title import title
 from prueba_func.components.link_sponsor import link_sponsor
 from prueba_func.components.link_button import link_button
@@ -28,7 +28,7 @@ def sponsors() -> rx.Component:
        
         width="100%",
         align_items="start",
-        spacing=Size.MEDIUM.value
+        spacing=Spacing.DEFAULT.value
     )
     
 # def sponsors() -> rx.Component:
