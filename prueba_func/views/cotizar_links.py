@@ -44,9 +44,9 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         # doc_prueba(),
         
         
-         # Título para los Muebles y el componente dinámico de muebles_links
+         
         title("Nuestros Modelos de Muebles"),
-        tabs_muebles(),  # Llama al componente muebles_links que contiene los tabs
+        tabs_muebles(),  
 
 
         title("Valores de la tabla Mubeles"), 
