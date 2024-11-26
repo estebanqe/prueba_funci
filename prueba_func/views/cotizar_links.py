@@ -1,6 +1,5 @@
 import reflex as rx
 from prueba_func.state.PageState import PageState
-from prueba_func.state.PageState import ModeloState
 from prueba_func.routes import Route
 from prueba_func.estilo.estilo import Color, Spacing   
 from prueba_func.components.link_button import link_button

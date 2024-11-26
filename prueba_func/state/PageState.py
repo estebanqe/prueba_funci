@@ -1,6 +1,6 @@
 import reflex as rx
 import asyncio
-from typing import List
+from typing import Union, List
 from prueba_func.api.SupabaseAPI import SupabaseAPI
 from prueba_func.api.api import live, featured, api_Muebles,api_Modelos
 from prueba_func.model.Featured import Featured
@@ -71,45 +71,12 @@ class ModelosState(rx.State):
         # Cargar los muebles desde la API
         self.modelos = await api_Modelos()
 
-    def change_acor(self, value: str):
-        self.acor_selected = value
-
-
-
-
-
-
-# tenemos la clase para llamar la lista modelos y usarla en el accordeon de los modelos 
-
-SUPABASE_API = SupabaseAPI()
-
-class ModeloState(rx.State):
-    """State para manejar modelos y selección en el acordeón."""
-
-    modelos: list[MODELOS] = []
-    acor_selected: str = "acor_0"
-
-    async def load_modelos(self):
-        """Carga modelos desde la API."""
-        try:
-            print("Cargando modelos...")
-            self.modelos = await api_Modelos()
-            print(f"Modelos cargados: {len(self.modelos)}")
-        except Exception as e:
-            print(f"Error al cargar modelos: {e}")
-            self.modelos = []  # Estado consistente si ocurre un error
-
-    def change_selected(self, value: str):
-        """Cambia el elemento seleccionado en el acordeón."""
-        print(f"Nuevo valor seleccionado: {value}")
-        self.acor_selected = value  # Actualiza el estado seleccionado
-
-
-    def get_selected_model(self):
-        """Obtiene el modelo correspondiente al valor seleccionado."""
-        # Busca el modelo correspondiente al valor seleccionado en el acordeón
-        selected_model = next((modelo for modelo in self.modelos if f"item_{modelo.id}" == self.acor_selected), None)
-        return selected_model
+    def change_acor(self, value: Union[str, List[str]]):
+        if isinstance(value, str):
+            self.acor_selected = value
+        elif isinstance(value, list):
+            # Si se pasa una lista, tomar el primer valor o manejarlo como desees
+            self.acor_selected = value[0] if value else ""
 
 
 
@@ -121,45 +88,3 @@ class ModeloState(rx.State):
 
 
 
-# buscamos la forma de mostrar la informacion del sql
-class CargarQLState(rx.State):
-    muebles_con_modelos: List[MuebleConModelo] = []
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Si necesitas hacer algo con parent_state, lo haces aquí
-        self.parent_state = kwargs.get("parent_state", None)
-
-    async def cargar_muebles_con_modelos(self, id_mueble: int):
-        """Carga muebles con modelos relacionados desde Supabase."""
-        try:
-            response = await SUPABASE_API.client.table("MUEBLES").select(
-                "mueble, descripcion, url_image, MODELOS(modelo, url_image)"
-            ).eq("id", id_mueble).execute()
-
-            if response.data:
-                # Depuración: Ver los datos obtenidos
-                print(f"Datos obtenidos de la base de datos: {response.data}")
-                
-                # Crear los objetos MuebleConModelo
-                self.muebles_con_modelos = [
-                    MuebleConModelo(
-                        mueble=item["mueble"],
-                        descripcion=item["descripcion"],
-                        url_image_mueble=item["url_image"],
-                        modelo=item["MODELOS"]["modelo"],
-                        url_image_modelo=item["MODELOS"]["url_image"],
-                    )
-                    for item in response.data
-                ]
-                print(f"Objetos cargados: {self.muebles_con_modelos}")
-            else:
-                print(f"No se encontraron muebles con el ID {id_mueble}")
-
-        except Exception as e:
-            print(f"Error al cargar muebles con modelos: {e}")
-            self.muebles_con_modelos = []
-
-    def __str__(self):
-        # Devolvemos una representación legible de la clase, incluyendo los muebles con modelos
-        return f"CargarQLState(muebles_con_modelos={self.muebles_con_modelos})"
