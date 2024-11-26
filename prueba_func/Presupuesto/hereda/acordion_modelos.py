@@ -15,7 +15,7 @@ def acordion_modelos() -> rx.Component:
                         rx.cond(
                             modelo.modelo,
                             modelo.modelo,  # Si modelo.modelo tiene valor
-                            "Sin nombre",    # Si modelo.modelo es None o vacío
+                            "SIn un nombre",    # Si modelo.modelo es None o vacío
                         ),
                         color="white",
                         width="300px",
