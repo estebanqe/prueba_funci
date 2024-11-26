@@ -1,4 +1,4 @@
-reflex==0.6.2
+reflex==0.6.5
 supabase
 python-dotenv
 Pillow
