@@ -1,8 +1,8 @@
 import reflex as rx
 
 
-class MODELOS(rx.Base):
+class MODELOS(rx.Model):
     modelo: str
     url_image: str
-    descripcion: str
+    descripcion: str 
     id_muebles: int

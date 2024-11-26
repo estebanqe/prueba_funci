@@ -1,7 +1,7 @@
 import reflex as rx
 
 
-class Featured(rx.Base):
+class Featured(rx.Model):
     title: str
     image: str
     url: str

@@ -1,7 +1,7 @@
 import reflex as rx
 
 
-class MUEBLES(rx.Base):
+class MUEBLES(rx.Model):
     # id: int
     mueble: str
     url_image: str

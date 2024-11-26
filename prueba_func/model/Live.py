@@ -1,6 +1,6 @@
 import reflex as rx
 
 
-class Live(rx.Base):
+class Live(rx.Model):
     live: bool
     title: str
