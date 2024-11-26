@@ -17,7 +17,7 @@ from prueba_func.state.PageState import PageState
     description=utils.courses_description,
     image=utils.preview,
     meta=utils.courses_meta,
-    on_load=[PageState.herrajes_links, PageState.muebles_links]
+    on_load=[PageState.muebles_links,PageState.modelo_links]
 )
 def cotizar() -> rx.Component:
     return rx.box(
@@ -27,8 +27,9 @@ def cotizar() -> rx.Component:
             rx.vstack(
                 header(False),
                 cotizar_links(
-                    PageState.herraje_info,
-                    PageState.mueble_info
+                    PageState.mueble_info,
+                    PageState.modelo_info,
+                    
                 ),
                 sponsors(),
                 max_width=styles.MAX_WIDTH,

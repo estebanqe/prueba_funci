@@ -4,8 +4,7 @@ from prueba_func.estilo.estilo import Spacing, Size
 from prueba_func.Presupuesto.hereda.acordion_modelos import acordion_modelos
 
 
-
-def doc_prueba() -> rx.Component:
+def tabs_muebles() -> rx.Component:
     return rx.container(
         # Componente de Tabs
         rx.tabs.root(
@@ -21,7 +20,7 @@ def doc_prueba() -> rx.Component:
                     ),
                     size="2",
                     width="100%",
-                    padding=Size.SMALL.value,
+                    # padding=Size.SMALL.value,
                 ),
                 type="always",
                 scrollbars="horizontal",
@@ -30,8 +29,9 @@ def doc_prueba() -> rx.Component:
                     "border_color": rx.color("blue", 1),
                     
                 }),
-                #  padding_top=Size.SMALL.value,
-                padding_y=Size.SMALL.value
+                padding_y=Size.SMALL.value,
+                width="100%",
+                
             ),
             # padding_y=Size.SMALL.value,
             
@@ -39,29 +39,38 @@ def doc_prueba() -> rx.Component:
                 MuebleState.muebles,
                 lambda mueble, index: 
                     rx.tabs.content(
-                        
-                        rx.hstack(
-                            
-                            rx.vstack(
-                                rx.heading(mueble.mueble, color="white",width="100%",),
-                                rx.image(
-                                    src=mueble.url_image,
-                                    height="auto",
-                                    width="250px",
+                        rx.box(
+                            rx.hstack(
+                                rx.box(
+                                    rx.vstack(
+                                        rx.heading(mueble.mueble, color="white",),
+                                        rx.image(
+                                            src=mueble.url_image,
+                                            height="auto",
+                                            width="250px",
+                                        ),
+                                        rx.text(mueble.descripcion, color="white"),
+                                        width="200px",
+                                        padding_top=Size.BIG.value,
+                                        aling="center"    
+                                    ),
                                 ),
-                                rx.text(mueble.descripcion, color="white"),
+                                rx.box(
+                                    acordion_modelos(),
+                                    width="300px",
+                                ),
                                 
+                                padding_left=Size.SMALL.value,
+                                flex_direction=["column", "row"],
+                                width="100%",
                             ),
-                            
-                            acordion_modelos(),
-                           
-                            padding_y=Size.DEFAULT.value
                             
                         ),
                         
-                    value=f"tab{index}",
-                    # padding_left=Size.VERY_BIG.value,
-                )
+                        width="100%", 
+                        value=f"tab{index}",
+                        
+                    )
             ),
             value=MuebleState.tab_selected,
             on_change=MuebleState.change_tab,

@@ -4,7 +4,7 @@ import prueba_func.constants as const
 import prueba_func.estilo.estilo as styles
 from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
 from prueba_func.components.title import title
-from prueba_func.Presupuesto.hereda.acordion_datos_escrit import acordion_datos_escrit
+from prueba_func.Presupuesto.hereda.acordion_modelos import acordion_modelos
 from prueba_func.estilo.estilo import Color, TextColor, Spacing, Size
 
 # Función para mostrar las opciones de muebles en pestañas
@@ -32,7 +32,7 @@ def modelos_melamina() -> rx.Component:
                     "Tenemos 3 opciones para ti",
                     "/modelos/escritorio-melamina.jpg",
                 ),
-                acordion_datos_escrit(),
+                acordion_modelos(),
                 spacing=Spacing.VERY_SMALL.value,
                 margin_top=Size.DEFAULT.value,
                 width="100%",

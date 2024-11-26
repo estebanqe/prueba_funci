@@ -1,17 +1,17 @@
 import reflex as rx
 from prueba_func.state.PageState import PageState
-from prueba_func.Presupuesto.hereda.acordion_datos_escrit import ModeloState
+from prueba_func.state.PageState import ModeloState
 from prueba_func.routes import Route
 from prueba_func.estilo.estilo import Color, Spacing   
 from prueba_func.components.link_button import link_button
 from prueba_func.components.title import title 
 from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.Presupuesto.doc_prueba import doc_prueba
-from prueba_func.Presupuesto.muebles_links import muebles_links
+from prueba_func.Presupuesto.tabs_muebles import tabs_muebles
 
-from prueba_func.Presupuesto.muestra_muebles_link import muestra_muebles_link
-from prueba_func.Presupuesto.mostrar_columna import muestra_modelos_link
-
+from prueba_func.Presupuesto.informacion_muebles import informacion_muebles
+from prueba_func.Presupuesto.infrmacion_modelos import infrmacion_modelos
+# from prueba_func.Presupuesto.mostrasconsulta import mostrar_muebles_con_modelos
 
 
 
@@ -46,7 +46,7 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         
          # Título para los Muebles y el componente dinámico de muebles_links
         title("Muebles"),
-        muebles_links(),  # Llama al componente muebles_links que contiene los tabs
+        tabs_muebles(),  # Llama al componente muebles_links que contiene los tabs
 
 
         title("muestra de valores"), 
@@ -56,7 +56,7 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
                 rx.flex(
                     rx.foreach(
                         PageState.mueble_info,
-                          muestra_muebles_link
+                          informacion_muebles
                     ),
                     flex_direction=["column", "row"],
                     spacing=Spacing.DEFAULT.value
@@ -68,14 +68,14 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         
         title("modelos"),
         rx.cond(
-            ModeloState.modelos,
+            PageState.modelo_info,
             rx.vstack(
                 
                 rx.flex(
                     
                     rx.foreach(
-                        ModeloState.modelos,
-                          muestra_modelos_link
+                        PageState.modelo_info,
+                          infrmacion_modelos
                     ),
                     flex_direction=["column", "row"],
                     spacing=Spacing.DEFAULT.value
@@ -83,11 +83,25 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
                 spacing=Spacing.DEFAULT.value
             )
         ),
+        
+        
+        # title("Muebles con Modelos Relacionados"),
+        # rx.cond(
+        #     CargarQLState.muebles_con_modelos,
+        #     rx.vstack(
+                
+        #         rx.flex(
+                    
+        #             rx.foreach(
+        #                 CargarQLState.muebles_con_modelos,
+        #                 mostrar_muebles_con_modelos
+        #             ),
+        #             flex_direction=["column", "row"],
+        #             spacing=Spacing.DEFAULT.value
+        #         ),
+        #         spacing=Spacing.DEFAULT.value
+        #     )
+        # ),
       
-          
-          
-       
-        width="100%",
-        spacing=Spacing.DEFAULT.value,
-       
+    width="100%",
     )
