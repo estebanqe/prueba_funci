@@ -24,6 +24,7 @@ def acordion_modelos(id_muebles) -> rx.Component:
                         content=rx.accordion.content(
                             rx.vstack(
                                 rx.text(
+                                    "modelo ",
                                     modelo['id_muebles'],  # Asegurarse de convertir a string
                                     color="white",
                                     width="100%",
