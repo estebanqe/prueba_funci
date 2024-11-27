@@ -83,24 +83,7 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
             )
         ),
         
-        
-        # title("Muebles con Modelos Relacionados"),
-        # rx.cond(
-        #     CargarQLState.muebles_con_modelos,
-        #     rx.vstack(
-                
-        #         rx.flex(
-                    
-        #             rx.foreach(
-        #                 CargarQLState.muebles_con_modelos,
-        #                 mostrar_muebles_con_modelos
-        #             ),
-        #             flex_direction=["column", "row"],
-        #             spacing=Spacing.DEFAULT.value
-        #         ),
-        #         spacing=Spacing.DEFAULT.value
-        #     )
-        # ),
+       
       
     width="100%",
     )

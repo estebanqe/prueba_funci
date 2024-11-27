@@ -12,6 +12,7 @@ def infrmacion_modelos(muestra_modelos: MODELOS) -> rx.Component:
     return rx.link(
         rx.text(
                 muestra_modelos.id_muebles,
+                " este es ",
                 size=Spacing.VERY_SMALL.value,
                 style=styles.button_body_style
             ),
