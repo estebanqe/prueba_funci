@@ -20,7 +20,7 @@ def tabs_muebles() -> rx.Component:
                     ),
                     size="2",
                     width="100%",
-                    # padding=Size.SMALL.value,
+                   
                 ),
                 type="always",
                 scrollbars="horizontal",
@@ -33,7 +33,7 @@ def tabs_muebles() -> rx.Component:
                 width="100%",
                 
             ),
-            # padding_y=Size.SMALL.value,
+           
             
             rx.foreach(
                 MuebleState.muebles,
@@ -56,7 +56,7 @@ def tabs_muebles() -> rx.Component:
                                     ),
                                 ),
                                 rx.box(
-                                    acordion_modelos(),
+                                    acordion_modelos(mueble.id),
                                     width="300px",
                                 ),
                                 
@@ -74,7 +74,6 @@ def tabs_muebles() -> rx.Component:
             ),
             value=MuebleState.tab_selected,
             on_change=MuebleState.change_tab,
-            default_value="tab0",
             on_mount=MuebleState.load_muebles,
             orientation="horizontal",
             spacing=Spacing.BIG.value,

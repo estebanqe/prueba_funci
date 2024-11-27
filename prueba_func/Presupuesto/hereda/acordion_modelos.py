@@ -19,16 +19,16 @@ def acordion_modelos(id_muebles) -> rx.Component:
                                 "Sin un nombre",    # Si modelo.modelo es None o vacío
                             ),
                             color="white",
-                            width="300px",
+                            width="100%",
                         ),
                         content=rx.accordion.content(
                             rx.vstack(
-                                rx.text(
-                                    "modelo ",
-                                    modelo['id_muebles'],  # Asegurarse de convertir a string
-                                    color="white",
-                                    width="100%",
-                                ),
+                                # rx.text(
+                                #     "modelo ",
+                                #     modelo['id_muebles'],  # Asegurarse de convertir a string
+                                #     color="white",
+                                #     width="100%",
+                                # ),
                                 rx.image(
                                     src=modelo['url_image'],
                                     height="auto",
@@ -52,7 +52,6 @@ def acordion_modelos(id_muebles) -> rx.Component:
             width="100%",
             type="single",
             on_value_change=ModelosState.change_acor,
-            default_value="item_0",
             variant="ghost",
             on_mount=ModelosState.load_modelos,
         ),

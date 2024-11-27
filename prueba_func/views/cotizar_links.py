@@ -1,16 +1,15 @@
 import reflex as rx
 from prueba_func.state.PageState import PageState
 from prueba_func.routes import Route
-from prueba_func.estilo.estilo import Color, Spacing   
+from prueba_func.estilo.estilo import Color, Spacing  ,Size 
 from prueba_func.components.link_button import link_button
 from prueba_func.components.title import title 
-from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
+# from prueba_func.Presupuesto.hereda.modelos_melamina import modelos_melamina
 from prueba_func.Presupuesto.doc_prueba import doc_prueba
 from prueba_func.Presupuesto.tabs_muebles import tabs_muebles
 
 from prueba_func.Presupuesto.informacion_muebles import informacion_muebles
 from prueba_func.Presupuesto.infrmacion_modelos import infrmacion_modelos
-# from prueba_func.Presupuesto.mostrasconsulta import mostrar_muebles_con_modelos
 
 
 
@@ -35,17 +34,15 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         ),
      
 
-        # title("Modelos"),
-        # modelos_melamina(),
-        
+    
        
-        title("Muestra del contenido del archivo prueba"),
-        doc_prueba(),
+        # title("Muestra del contenido del archivo prueba"),
+        # doc_prueba(),
         
         
          
-        # title("Nuestros Modelos de Muebles"),
-        # tabs_muebles(),  
+        title("Nuestros Modelos de Muebles"),
+        tabs_muebles(),  
 
 
         title("Valores de la tabla Mubeles"), 
@@ -55,7 +52,8 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
                 rx.flex(
                     rx.foreach(
                         PageState.mueble_info,
-                          informacion_muebles
+                          informacion_muebles,
+                          
                     ),
                     flex_direction=["column", "row"],
                     spacing=Spacing.DEFAULT.value
