@@ -4,7 +4,7 @@ from prueba_func.model.MUEBLES import MUEBLES
 class MueblesAPI(BaseAPI):
     def Muebles(self) -> list[MUEBLES]:
         
-        response = self.client.table("MUEBLES").select("*").order("mueble").limit(50).execute()
+        response = self.client.table("MUEBLES").select("*").order("id").limit(50).execute()
 
         mueble_data = []
         
