@@ -1,5 +1,5 @@
 import reflex as rx
-
+from pydantic import BaseModel
 
 class MODELOS(rx.Model):
     modelo: str
