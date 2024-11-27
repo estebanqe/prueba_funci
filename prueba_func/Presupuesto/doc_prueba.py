@@ -1,5 +1,5 @@
 import reflex as rx
-from prueba_func.state.PageState import MuebleState
+from prueba_func.state.PageState import MuebleState,ModelosState
 from prueba_func.estilo.estilo import Spacing, Size
 from prueba_func.Presupuesto.hereda.acordion_modelos import acordion_modelos
 
@@ -44,6 +44,7 @@ def doc_prueba() -> rx.Component:
                             
                             rx.vstack(
                                 rx.heading(mueble.mueble, color="white",width="100%",),
+                                rx.text(mueble.id, color="white"),
                                 rx.image(
                                     src=mueble.url_image,
                                     height="auto",
@@ -53,7 +54,9 @@ def doc_prueba() -> rx.Component:
                                 
                             ),
                             
-                            acordion_modelos(),
+                            
+                            
+                            acordion_modelos(mueble.id),
                            
                             padding_y=Size.DEFAULT.value
                             

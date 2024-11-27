@@ -10,6 +10,12 @@ def infrmacion_modelos(muestra_modelos: MODELOS) -> rx.Component:
     print(f"Mostrando modelo: {muestra_modelos}")  # Verifica qué datos están llegando
 
     return rx.link(
+        rx.text(
+                muestra_modelos.id_muebles,
+                size=Spacing.VERY_SMALL.value,
+                style=styles.button_body_style
+            ),
+        
         rx.vstack(
             rx.image(
                 muestra_modelos.url_image,

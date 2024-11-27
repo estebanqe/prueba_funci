@@ -39,13 +39,13 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         # modelos_melamina(),
         
        
-        # title("Muestra del contenido del archivo prueba"),
-        # doc_prueba(),
+        title("Muestra del contenido del archivo prueba"),
+        doc_prueba(),
         
         
          
-        title("Nuestros Modelos de Muebles"),
-        tabs_muebles(),  
+        # title("Nuestros Modelos de Muebles"),
+        # tabs_muebles(),  
 
 
         title("Valores de la tabla Mubeles"), 

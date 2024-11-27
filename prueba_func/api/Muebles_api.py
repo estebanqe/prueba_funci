@@ -12,6 +12,7 @@ class MueblesAPI(BaseAPI):
             for mueble_item in response.data:
                 mueble_data.append(
                     MUEBLES(
+                        id=mueble_item["id"],
                         mueble=mueble_item["mueble"],
                         descripcion=mueble_item["descripcion"],
                         url_image=mueble_item["url_image"]
