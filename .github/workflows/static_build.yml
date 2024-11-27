@@ -7,12 +7,15 @@ on:
 
 jobs:
   build:
-    if: github.repository == 'estebanqe/prueba_funci'
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
-  
+
+    env: # Definimos las variables de entorno
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -34,3 +37,4 @@ jobs:
           commit_user_name: Esteban Quiña [GitHub Actions]
           commit_user_email: estebanquinae@gmail.com
           commit_author: Esteban Quiña <estebanquinae@gmail.com>
+
