@@ -1,7 +1,6 @@
 import reflex as rx
-from pydantic import BaseModel
 
-class MODELOS(rx.Model):
+class MODELOS(rx.Model, table=True):
     modelo: str
     url_image: str
     descripcion: str 

@@ -1,7 +1,6 @@
 import reflex as rx
-from pydantic import BaseModel
 
-class Featured(rx.Model):
+class Featured(rx.Model, table=True):
     title: str
     image: str
     url: str
