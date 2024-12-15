@@ -1,6 +1,4 @@
+pip==24.3.1
 reflex==0.6.5
-
-supabase
-python-dotenv
-Pillow
-requests
+python-dotenv==1.0.1
+supabase==2.9.1

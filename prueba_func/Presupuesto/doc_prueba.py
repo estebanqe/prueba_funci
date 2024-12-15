@@ -1,7 +1,7 @@
 import reflex as rx
 from prueba_func.state.PageState import MuebleState,ModelosState
 from prueba_func.estilo.estilo import Spacing, Size
-from prueba_func.Presupuesto.hereda.acordion_modelos import acordion_modelos
+from prueba_func.Presupuesto.acordion_modelos import acordion_modelos
 
 
 

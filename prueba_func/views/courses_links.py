@@ -64,14 +64,7 @@ def courses_links() -> rx.Component:
             "dimension 2.12 x 2.44 m",
             "/material/Toquilla.jpg"
         ),
-        link_button(
-            "Cotizacion",
-            "cotizacion tu Productos",
-            "/icons/book-solid.svg",
-            Route.COTIZAR.value,
-            False,
-            Color.PRO.value
-        ),
+        
         width="100%",
         spacing=Spacing.DEFAULT.value,
         padding_top=Size.BIG.value

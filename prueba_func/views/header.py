@@ -12,42 +12,11 @@ from prueba_func.state.PageState import PageState
 def header(details=True) -> rx.Component:
     return rx.vstack(
         rx.hstack(
-            # rx.box(
-            #     rx.cond(
-            #         PageState.is_live,
-            #         rx.link(
-            #             rx.image(
-            #                 src="/icons/book-solid.svg",
-            #                 height=Size.DEFAULT.value,
-            #                 width=Size.DEFAULT.value    
-            #             ),
-            #             href=const.CATALOGO,
-            #             is_external=True,
-            #             class_name="blink",
-            #             border_radius="50%",
-            #             padding=Size.SMALL.value,
-            #             bg=Color.PURPLE.value,
-            #             position="absolute",
-            #             bottom="0",
-            #             right="0"
-            #         )
-            #     ),
-            #     rx.avatar(
-            #         name="Julio. César Quiña",
-            #         size=Spacing.MEDIUM_BIG.value,
-            #         src="/AvatarC.png",
-            #         radius="full",
-            #         color=TextColor.BODY.value,
-            #         bg=Color.CONTENT.value,
-            #         padding="2px",
-            #         border=f"4px solid {Color.PRIMARY.value}"
-            #     ),
-            #     position="relative"
-            # ),
+            
              rx.avatar(
                     name="Julio. César Quiña",
                     size=Spacing.MEDIUM_BIG.value,
-                    src="/AvatarC.png",
+                    src="/creyenteLogo.jpg",
                     radius="full",
                     color=TextColor.BODY.value,
                     bg=Color.CONTENT.value,

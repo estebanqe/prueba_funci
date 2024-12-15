@@ -1,8 +1,5 @@
 import reflex as rx
 from prueba_func.state.PageState import ModelosState
-from prueba_func.estilo.estilo import Size, Spacing, TextColor
-from prueba_func.Presupuesto.botton_modelos_mela import botton_modelos_mela
-from prueba_func.Presupuesto.hereda.acordion_opc_disen import acordion_material_melamina
 
 def acordion_modelos(id_muebles) -> rx.Component:
     return rx.container(
@@ -18,7 +15,7 @@ def acordion_modelos(id_muebles) -> rx.Component:
                                 modelo['modelo'],  # Mostrar modelo.modelo
                                 "Sin un nombre",    # Si modelo.modelo es None o vacío
                             ),
-                            color="white",
+                            # color="indigo",
                             width="100%",
                         ),
                         content=rx.accordion.content(
@@ -54,6 +51,7 @@ def acordion_modelos(id_muebles) -> rx.Component:
             on_value_change=ModelosState.change_acor,
             variant="ghost",
             on_mount=ModelosState.load_modelos,
+            color_scheme="indigo"
         ),
         width="100%",
     )

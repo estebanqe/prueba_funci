@@ -6,7 +6,6 @@ from prueba_func.api.api import live, featured, api_Muebles,api_Modelos
 from prueba_func.model.Featured import Featured
 from prueba_func.model.MUEBLES import MUEBLES
 from prueba_func.model.MODELOS import MODELOS
-from prueba_func.model.MuebleConModelo import MuebleConModelo
 
 
 

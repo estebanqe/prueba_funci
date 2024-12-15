@@ -45,41 +45,41 @@ def cotizar_links(HERRAJES=[], MUEBLES=[]) -> rx.Component:
         tabs_muebles(),  
 
 
-        title("Valores de la tabla Mubeles"), 
-        rx.cond(
-            PageState.mueble_info,
-            rx.vstack(
-                rx.flex(
-                    rx.foreach(
-                        PageState.mueble_info,
-                          informacion_muebles,
+        # title("Valores de la tabla Mubeles"), 
+        # rx.cond(
+        #     PageState.mueble_info,
+        #     rx.vstack(
+        #         rx.flex(
+        #             rx.foreach(
+        #                 PageState.mueble_info,
+        #                   informacion_muebles,
                           
-                    ),
-                    flex_direction=["column", "row"],
-                    spacing=Spacing.DEFAULT.value
-                ),
-                spacing=Spacing.DEFAULT.value
-            )
-        ),
+        #             ),
+        #             flex_direction=["column", "row"],
+        #             spacing=Spacing.DEFAULT.value
+        #         ),
+        #         spacing=Spacing.DEFAULT.value
+        #     )
+        # ),
         
         
-        title("VAlores de la tabla Modelos"),
-        rx.cond(
-            PageState.modelo_info,
-            rx.vstack(
+        # title("VAlores de la tabla Modelos"),
+        # rx.cond(
+        #     PageState.modelo_info,
+        #     rx.vstack(
                 
-                rx.flex(
+        #         rx.flex(
                     
-                    rx.foreach(
-                        PageState.modelo_info,
-                          infrmacion_modelos
-                    ),
-                    flex_direction=["column", "row"],
-                    spacing=Spacing.DEFAULT.value
-                ),
-                spacing=Spacing.DEFAULT.value
-            )
-        ),
+        #             rx.foreach(
+        #                 PageState.modelo_info,
+        #                   infrmacion_modelos
+        #             ),
+        #             flex_direction=["column", "row"],
+        #             spacing=Spacing.DEFAULT.value
+        #         ),
+        #         spacing=Spacing.DEFAULT.value
+        #     )
+        # ),
         
        
       

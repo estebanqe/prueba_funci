@@ -1,16 +1,13 @@
 import os
 import dotenv
 from supabase import create_client, Client
-from prueba_func.model.Featured import Featured 
-from prueba_func.model.MUEBLES import MUEBLES
-from prueba_func.model.MODELOS import MODELOS
-
-
+from prueba_func.model.Featured import Featured
 
 
 class SupabaseAPI:
 
     dotenv.load_dotenv()
+
 
     SUPABASE_URL = os.environ.get("SUPABASE_URL")
     SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
@@ -21,11 +18,10 @@ class SupabaseAPI:
                 self.SUPABASE_URL, self.SUPABASE_KEY
             )
 
-    
-    
-    def featured(self) -> list[Featured]:
+    def     featured(self) -> list[Featured]:
 
-        response = self.supabase.table("featured").select("*").order("init_date", desc=True).limit(2).execute()
+        response = self.supabase.table(
+            "featured").select("*").order("init_date", desc=True).limit(2).execute()
 
         featured_data = []
 
@@ -40,9 +36,6 @@ class SupabaseAPI:
                 )
 
         return featured_data
-    
-
-    
     
     
     
